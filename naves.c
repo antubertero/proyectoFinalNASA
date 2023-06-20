@@ -436,7 +436,7 @@ void consultPorIDNAVE()
 
 
 ///MODIFICACION DE NAVE
-void modificacionDeNave()  /// no funciona preguntar al profe
+void modificacionDeNave()
 {
 
     system("cls"); /// limpia la pantalla

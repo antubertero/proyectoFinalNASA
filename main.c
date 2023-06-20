@@ -192,7 +192,7 @@ void MenuPrincipal()
 
                 case 2 :
 
-                    /// hacer funcion retorno
+                    retornoDeLaMision();
                     break;
                 }
                 break;

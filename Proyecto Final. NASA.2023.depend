@@ -94,7 +94,7 @@
 
 1687182541 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.h
 
-1687273533 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
+1687291713 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -103,7 +103,7 @@
 	"naves.h"
 	"astronautas.h"
 
-1687021616 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
+1687294271 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
