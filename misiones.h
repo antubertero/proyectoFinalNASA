@@ -20,10 +20,22 @@ typedef struct
 
 /// FUNCIONES DE MENU
 
-
-void altaAstronautaMisionViaje(int astronautaID[]);
+void altaMision();
+void listadoMisiones();
+void contasultaIDmision();
+void bajaMision();
+void despegueDeMision();
+void retornoDeLaMision();
+int chequeoEstadoNave (int id);
+int chequeoAstronauta(int id);
+int retornarHorasSegunDestinoDeLaMision(int misionID);
+int retornarIDnaveconLaIDmision(int misionID);
+void estadoDenaveBaja(int idNave);
+void estadoDenaveEnMision(int idnave);
+int retornarIdDePiolotoConIDdeMision(int misionID, int NumeroPiloto);
+int detectarModeloDeLaNaveConIDMision(int misionID);
+void altaAstronautaMisionViaje(int astronautaID, int destino);
 void bajaDeAstronautaPorMuerte(int astronautaID[]);
-int estadoDeDespegueResultado();
 int detectarModeloDeNave(int idNave);
 int verificacionDeEstadoDeAstronauta(int idCargaAstronauta);
 int verificacionDeMisionEntrada(int idMisionVerificacion);
