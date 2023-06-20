@@ -1,0 +1,125 @@
+# depslib dependency file v1.0
+1686775834 source:c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final. nasa.2023\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"naves.h"
+
+1686775834 c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final. nasa.2023\naves.h
+
+1686670509 source:c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final. nasa.2023\astronautas.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"astronautas.h"
+
+1686670169 c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final. nasa.2023\astronautas.h
+
+1686778666 source:c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final. nasa.2023\naves.c
+	<stdio.h>
+	<stdlib.h>
+	"naves.h"
+	<windows.h>
+
+1686866037 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\proyecto final nasa mejorado\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"naves.h"
+
+1686775836 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\proyecto final nasa mejorado\naves.h
+
+1686867437 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\proyecto final nasa mejorado\astronautas.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"astronautas.h"
+
+1686867410 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\proyecto final nasa mejorado\astronautas.h
+
+1686864272 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\proyecto final nasa mejorado\naves.c
+	<stdio.h>
+	<stdlib.h>
+	"naves.h"
+	<windows.h>
+
+1687021746 source:c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"naves.h"
+	"astronautas.h"
+
+1686775836 c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\naves.h
+
+1687015293 c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\astronautas.h
+
+1687021614 source:c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\naves.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"naves.h"
+	<time.h>
+	"astronautas.h"
+	"misiones.h"
+	<windows.h>
+
+1687015293 source:c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\astronautas.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"astronautas.h"
+	"naves.h"
+	"misiones.h"
+
+1687040301 c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\misiones.h
+
+1687015294 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\astronautas.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"astronautas.h"
+	"naves.h"
+	"misiones.h"
+
+1687015294 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\astronautas.h
+
+1686775836 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.h
+
+1687182541 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.h
+
+1687273533 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"naves.h"
+	"astronautas.h"
+
+1687021616 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"naves.h"
+	<time.h>
+	"astronautas.h"
+	"misiones.h"
+	<windows.h>
+
+1687273623 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"astronautas.h"
+	"naves.h"
+	"misiones.h"
+
