@@ -772,6 +772,17 @@ void despegueDeMision()
             MenuPrincipal();
 
         }
+    }else{
+
+     system("cls"); /// limpia la pantalla
+
+
+    printf("\nLa ID de la mision no se encontro \n");
+
+    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+    MenuPrincipal();
+
     }
 }
 
