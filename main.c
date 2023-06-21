@@ -170,7 +170,8 @@ void MenuPrincipal()
                 break;
 
             case 2:
-                printf("Baja de mision \n"); /// HAY QUE VALIDAR Q NO ESTE ACTIVA
+                printf("Baja de mision \n");
+                bajaMision(); /// HAY QUE VALIDAR Q NO ESTE ACTIVA
                 break;
 
             case 3:

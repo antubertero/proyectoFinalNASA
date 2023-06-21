@@ -63,7 +63,7 @@ void altaMision()
 
 
 
-        printf("\nIndicar el destino:  \n 1) Orbita terrestre\n 2) Luna\n3) marte\n 4) Jupiter\n 5) Saturno\n6) Urano\n 7) Neptuno\n\n   Ingresar opcion: ");
+        printf("\nIndicar el destino:  \n 1) Orbita terrestre\n 2) Luna\n 3) marte\n 4) Jupiter\n 5) Saturno\n 6) Urano\n 7) Neptuno\n\n   Ingresar opcion: ");
         scanf("%i", &opcionDeViaje);
 
         ///SWITCH ELEGIR DESTINO
@@ -259,7 +259,7 @@ void altaMision()
     }
 
 
-
+    MenuPrincipal();
 
 }
 
@@ -758,12 +758,12 @@ void despegueDeMision()
 
         }
         else if(validacion == 0)
-            {
+        {
 
-                printf("\nLA ID NO EXISTE\n");
+            printf("\nLA ID NO EXISTE\n");
 
 
-            }
+        }
 
         else
         {
@@ -838,11 +838,11 @@ void retornoDeLaMision()
 
     }
     else if(validacion == 0)
-        {
+    {
 
-            printf("\n\nId de la mision inexistente\n");
+        printf("\n\nId de la mision inexistente\n");
 
-        }
+    }
     else
     {
 
@@ -914,7 +914,8 @@ int estadoDeDespegueResultado()
 
     int resultado = rand() % 10 + 1;
 
-    if (resultado <= 3) {
+    if (resultado <= 3)
+    {
         return 3;
         return 2;
     }
