@@ -880,22 +880,23 @@ int chequeoAstronauta(int id)
 {
     int estado;
     stAstronauta astronauta;
-    FILE *archivo;
-    archivo=fopen("listaAstronauta.bin", "rb");
-    if(archivo != NULL)
+    FILE* archivo;
+    archivo = fopen("listaAstronauta.bin", "rb");
+    if (archivo != NULL)
     {
-        while((fread(&astronauta, sizeof(stAstronauta), 1, archivo))==1)
+        while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) > 0)
         {
-            if(id=astronauta.ID)
+            if (id == astronauta.ID)
             {
-                estado=astronauta.estado;
-                fclose(archivo);
-                return estado;
+                estado = astronauta.estado;
+                break;
             }
-                   
         }
-            
+
+        fclose(archivo);
     }
+
+    return estado;
 }
 
 
@@ -905,6 +906,20 @@ int chequeoAstronauta(int id)
 ///----------------------
 
 /// retornar las hoiras de vuelo segun la mision
+
+
+int estadoDeDespegueResultado()
+{
+    srand(time(NULL));
+
+    int resultado = rand() % 10 + 1;
+
+    if (resultado <= 3) {
+        return 3;
+        return 2;
+    }
+}
+
 
 int retornarHorasSegunDestinoDeLaMision(int misionID)
 {
