@@ -78,7 +78,7 @@
 
 1687040301 c:\users\antub\documents\programacion\utn\laboratorio y programacion 1\proyecto final\proyecto final nasa mejorado\misiones.h
 
-1687015294 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\astronautas.c
+1687968201 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\astronautas.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -88,13 +88,13 @@
 	"naves.h"
 	"misiones.h"
 
-1687015294 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\astronautas.h
+1687957376 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\astronautas.h
 
-1686775836 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.h
+1687958681 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.h
 
-1687302450 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.h
+1687963560 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.h
 
-1687313349 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
+1687968336 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -103,7 +103,7 @@
 	"naves.h"
 	"astronautas.h"
 
-1687294271 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
+1687968169 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
@@ -113,7 +113,7 @@
 	"misiones.h"
 	<windows.h>
 
-1687313622 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.c
+1687968336 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>

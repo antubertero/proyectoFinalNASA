@@ -7,7 +7,7 @@ typedef struct
     int  tipoDeNave;  /// 1 = Starship  - 2 = Falcon 9  -   3 = Falcon Heavy
     int cantidadDeVuelosRealizados;
     float horasDeVueloAcumuladas;
-    int estado; ///  (0- mantenimiento 1- Lista para su uso 2- Actualmente en misi�n 3- De baja)
+    int estado; ///  (0- mantenimiento 1- Lista para su uso 2- Actualmente en misi�n 3- De baja 4 - mision asignada)
 
 
 } stNave;
@@ -19,6 +19,7 @@ void bajaNave();
 void listadoNaves();
 void consultPorIDNAVE();
 void modificacionDeNave();
+int estadoDeNave(int ID);
 
 /// DIBUJOS DE NAVES
 void imprimirStarship();

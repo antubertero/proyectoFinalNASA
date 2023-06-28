@@ -14,7 +14,7 @@ typedef struct
     float horasDeVueloAcumuladas;
     int misionesEspecialesRealizadas;
     float horasAcumuladasEnElEspacioInternacioal;
-    int estado; ///(1- Activo 2- Retirado  3 - En viaje 4 - Baja en mision)
+    int estado; ///(1- Activo 2- Retirado  3 - En viaje 4 - Baja en mision) 5 - mision asignada
 
 } stAstronauta ;
 
@@ -24,8 +24,9 @@ void modificacionAstronauta();
 void mostrarListado();
 
 int verificacionDeIdAstronauta(int astronautaIDverficacion);
+int estadoDeAstronauta(int IDBuscado);
 
 
-
+///listaAstronauta.bin
 
 #endif // ASTRONAUTAS_H_INCLUDED

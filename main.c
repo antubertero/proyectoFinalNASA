@@ -176,10 +176,10 @@ void MenuPrincipal()
 
             case 3:
 
-
+                system("cls"); /// limpia la pantalla
                 printf("Modidicacion de ESTADO de mision \n");
 
-                printf("\n1)Despegue\n2)retorno\n\nIngresar opcion:  ");
+                printf("\n1)Despegue\n2)retorno\n3)Taller de naves\nIngresar opcion:  ");
                 scanf("%i", &opcion3);
 
                 switch(opcion3)
@@ -195,6 +195,11 @@ void MenuPrincipal()
 
                     retornoDeLaMision();
                     break;
+
+                case 3:
+                    sacarDeMantenimiento();
+                    break;
+
                 }
                 break;
 

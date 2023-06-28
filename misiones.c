@@ -12,260 +12,480 @@
 
 void altaMision()
 {
+    system("cls"); /// limpia la pantalla
+    printf("\n----------------\nINICIO DE MISION:\n----------------\n\n");
+
     int tripulante;
     int verificacion;
     int estado;
-    int estadoVerificacion;
     int opcionDeViaje;
     int confirmarDespege;
+    int estadoDeNaveCambiado = 0;
+    int entrada = 0;
+    int misionCheck, verificacionSalida;
+    int IDnaveIngresado;
 
-    FILE* archivo;
-    archivo=fopen("listaMisiones.bin", "wb+");
-    stMision mision;
+
+
 
     int i=0;
 
-    if(archivo != NULL)
+
+    printf("\nIngrese el ID que le quieres asignar a la mision\n\nIngresar ID: ");
+    scanf("%i", &misionCheck);
+
+
+    int resultadoVerificacionID = verificacionDeIDMISION(misionCheck);
+
+    if(resultadoVerificacionID == 0)
     {
-        printf("Ingrese el id");
-        scanf("%i", &mision.ID);
 
-        printf("Ingrese el id de la nave que desea usar \n"); ///FALTA VERIFICAR ESTADO
-        scanf("%i", &estadoVerificacion);
+        printf("\nIngrese el ID de la nave que desea usar : ");
+        scanf("%i", &IDnaveIngresado);
 
-        estado=chequeoEstadoNave(estadoVerificacion);
-
+        estado=chequeoEstadoNave(IDnaveIngresado);
+        ///--------
         ///SWITCH VERIFICACION NAVE
+
+
 
         switch(estado)
         {
+        case -1:
+            system("cls"); /// limpia la pantalla
+            printf("\n\nLa ID de la nave NO existe.");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+            MenuPrincipal();
+            break;
+
+
         case 0:
-            printf("NAVE EN MANTENIMIENTO");
+            system("cls"); /// limpia la pantalla
+            printf("\n\nNAVE EN MANTENIMIENTO");
+
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
             altaMision();
             break;
 
         case 1:
-            printf("LA NAVE ESTA DISPONIBLE");
-            mision.IDnave=estadoVerificacion;
-            ///cambiar estado de la nave
+
+            printf("\n\nLA NAVE ESTA DISPONIBLE");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+            entrada = 1;
+            estadoDeNaveCambiado = 1;
             break;
 
         case 2:
-            printf("NAVE EN MISION");
+            system("cls"); /// limpia la pantalla
+            printf("\n\nNAVE EN MISION");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
             altaMision();
             break;
 
         case 3:
+            system("cls"); /// limpia la pantalla
             printf("LA NAVE SE DIO DE BAJA");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
             altaMision();
-            break;
-        }
-
-
-
-        printf("\nIndicar el destino:  \n 1) Orbita terrestre\n 2) Luna\n 3) marte\n 4) Jupiter\n 5) Saturno\n 6) Urano\n 7) Neptuno\n\n   Ingresar opcion: ");
-        scanf("%i", &opcionDeViaje);
-
-        ///SWITCH ELEGIR DESTINO
-
-        switch(opcionDeViaje)
-        {
-
-        case 1:
-
-            printf("\n Viaje a la orbita terrestre \n La hora de viaje aproximada es de 9hs. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=1;
-            }
-
-            break;
-
-        case 2:
-
-            printf("\n Viaje a la Luna \n La hora de viaje aproximada es de 72hs. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=2;
-            }
-
-            break;
-
-        case 3:
-            printf("\n Viaje a Marte \n La hora de viaje aproximada es de 7 meses / 5.226 horas. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=3;
-            }
-
             break;
 
         case 4:
-            printf("\n Viaje a Jupiter \n La hora de viaje aproximada es de 30 meses / 21.900 horas. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=4;
-            }
-
+            system("cls"); /// limpia la pantalla
+            printf("LA NAVE YA TIENE UNA MISION ASIGNADA");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+            altaMision();
             break;
-
-        case 5:
-            printf("\n Viaje a Saturno \n La hora de viaje aproximada es de 78 meses / 56.940 horas. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=5;
-            }
-
-            break;
-
-
-        case 6:
-
-            printf("\n Viaje a Urano \n La hora de viaje aproximada es de 132 meses / 96,360 horas. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=6;
-            }
-
-            break;
-
-
-        case 7:
-
-            printf("\n Viaje a Neptuno \n La hora de viaje aproximada es de 156 meses / 113.880 horas. \n Ingresar UNO para confirmar: ");
-            scanf("%i", &confirmarDespege);
-
-            if(confirmarDespege==1)
-            {
-                mision.destino=7;
-            }
-
-            break;
-
 
         }
 
-        printf("Ingrese el cargamento \n");
-        fflush(stdin);
-        scanf("%s", &mision.cargamento);
 
-        ///CARGA TRIPULANTE 1
-        printf("Ingrese el id del primer tripulante \n"); ///FALTA VERIFICAR ESTADO
-        scanf("%i", &tripulante);
+        ///-------
 
-        verificacion=chequeoAstronauta(tripulante);
-        switch(verificacion)
+
+
+
+
+        FILE* archivo;
+
+        stMision mision;
+
+        archivo=fopen("ListaMisiones.bin", "ab");
+        if(archivo != NULL)
         {
-        case 1:
-            printf("ASTRONAUTA ASIGNADO! \n");
-            tripulante=mision.IDtripulante_1;
-            break;
 
-        case 2:
-            printf("EL ASATRONAUTA ESTA RETIRADO! \n");
-            printf("INGRESE OTRO ID \n");
-            scanf("%i", &tripulante);
-            verificacion=chequeoAstronauta(tripulante);
-            if(verificacion==1)
+
+
+
+
+            mision.ID = misionCheck;
+
+
+            int salidaConfirmacionDeViaje = 0;
+
+            while(salidaConfirmacionDeViaje == 0)
             {
-                printf("ASTRONAUTA ASIGNADO CON EXITO!! \n");
-                tripulante=mision.IDtripulante_1;
 
-                break;
+                printf("\nIndicar el destino:  \n\n 1) Orbita terrestre\n 2) Luna\n 3) marte\n 4) Jupiter\n 5) Saturno\n 6) Urano\n 7) Neptuno\n\n   Ingresar opcion: ");
+                scanf("%i", &opcionDeViaje);
+
+                ///SWITCH ELEGIR DESTINO
+
+                switch(opcionDeViaje)
+                {
+
+                case 1:
+
+                    printf("\n Viaje a la orbita terrestre \n La hora de viaje aproximada es de 9hs. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=1;
+                        salidaConfirmacionDeViaje = 1;
+
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+                    break;
+
+                case 2:
+
+                    printf("\n Viaje a la Luna \n La hora de viaje aproximada es de 72hs. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=2;
+                        salidaConfirmacionDeViaje = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+
+                    break;
+
+                case 3:
+                    printf("\n Viaje a Marte \n La hora de viaje aproximada es de 7 meses / 5.226 horas. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=3;
+                        salidaConfirmacionDeViaje = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+
+                    break;
+
+                case 4:
+                    printf("\n Viaje a Jupiter \n La hora de viaje aproximada es de 30 meses / 21.900 horas. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=4;
+                        salidaConfirmacionDeViaje = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+
+
+                    break;
+
+                case 5:
+                    printf("\n Viaje a Saturno \n La hora de viaje aproximada es de 78 meses / 56.940 horas. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=5;
+                        salidaConfirmacionDeViaje = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+
+                    break;
+
+
+                case 6:
+
+                    printf("\n Viaje a Urano \n La hora de viaje aproximada es de 132 meses / 96,360 horas. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=6;
+                        salidaConfirmacionDeViaje = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+
+                    break;
+
+
+                case 7:
+
+                    printf("\n Viaje a Neptuno \n La hora de viaje aproximada es de 156 meses / 113.880 horas. \n Ingresar UNO para confirmar: ");
+                    scanf("%i", &confirmarDespege);
+
+                    if(confirmarDespege==1)
+                    {
+                        mision.destino=7;
+                        salidaConfirmacionDeViaje = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nNo se confirmo el destino \n\nLa carga de la mision no fue confirmada ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        printf("\nIngresar nuevamente el destino ");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+                    }
+
+
+                    break;
+
+
+                }
+
             }
+
+
+
+            printf("\n\nDestino cargado con exito \n\n");
+
+
+
+            printf("Ingrese el cargamento :\n");
+            fflush(stdin);
+            scanf("%s", &mision.cargamento);
+            fflush(stdin);
+            printf("Ingrese detalles de la mision \n");
+            fflush(stdin);
+            scanf("%s", &mision.detalleDeLaMision);
+            fflush(stdin);
+            ///CARGA TRIPULANTE
+            int salidaDeCargaDeTripulantes = 0;
+
+            while(salidaDeCargaDeTripulantes < 3)
+            {
+
+                printf("Ingrese el ID del tripulante %i : \n", salidaDeCargaDeTripulantes+1); ///FALTA VERIFICAR ESTADO
+                scanf("%i", &tripulante);
+
+                verificacion=chequeoAstronauta(tripulante);
+                switch(verificacion)
+                {
+                case 1:
+                    printf("\nASTRONAUTA ASIGNADO! \n");
+
+                    if(salidaDeCargaDeTripulantes == 0)
+                    {
+
+                        mision.IDtripulante_1 = tripulante;
+                        modificarEstadoDeAstronautaAMisionAsignada(mision.IDtripulante_1);
+
+                    }
+                    else if(salidaDeCargaDeTripulantes == 1)
+                    {
+
+                        mision.IDtripulante_2 = tripulante;
+                        modificarEstadoDeAstronautaAMisionAsignada(mision.IDtripulante_2);
+
+                    }
+                    else if(salidaDeCargaDeTripulantes == 2)
+                    {
+
+                        mision.IDtripulante_3 = tripulante;
+                        modificarEstadoDeAstronautaAMisionAsignada(mision.IDtripulante_3);
+
+                    }
+                    salidaDeCargaDeTripulantes++;
+                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                    break;
+
+                case 2:
+                    printf("EL ASATRONAUTA ESTA RETIRADO! \n");
+                    printf("INGRESE OTRO ID \n");
+                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+                    break;
+
+                case 3:
+                    printf("EL ASATRONAUTA YA ESTA EN OTRA MISION! \n");
+                    printf("INGRESE OTRO ID \n");
+                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+                    break;
+
+
+                case 4:
+                    printf("EL ASATRONAUTA ESTA DE BAJA! \n");
+                    printf("INGRESE OTRO ID \n");
+                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+                    break;
+
+
+                }
+            }
+
+
+
+            cambiarEstadoDeLaNaveAMisionAsignada(IDnaveIngresado);
+
+
+
+            mision.estado=1;
+            mision.IDnave = IDnaveIngresado;
+
+            fwrite(&mision, sizeof(stMision), 1, archivo);
+            fclose(archivo);
+
+            system("cls"); /// limpia la pantalla
+
+            printf("\n\nLA MISION FUE CARGADA CON EXITO\n");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+
         }
-        ///CARGAR TRIPULANTE 2
-
-        printf("Ingrese el id del segundo tripulante \n"); ///FALTA VERIFICAR ESTADO
-        scanf("%i", &tripulante);
-
-        verificacion=chequeoAstronauta(tripulante);
-        switch(verificacion)
+        else
         {
-        case 1:
-            printf("ASTRONAUTA ASIGNADO! \n");
-            tripulante=mision.IDtripulante_2;
-            break;
 
-        case 2:
-            printf("EL ASATRONAUTA ESTA RETIRADO! \n");
-            printf("INGRESE OTRO ID \n");
-            scanf("%i", &tripulante);
-            verificacion=chequeoAstronauta(tripulante);
-            if(verificacion==1)
-            {
-                printf("ASTRONAUTA ASIGNADO CON EXITO!! \n");
-                tripulante=mision.IDtripulante_2;
+            printf("\nNO SE PUEDO ABRIR EL ARCHIVO");
 
-                break;
-            }
+
         }
 
-        ///CARGAR TRIPULANTE 3
-
-        printf("Ingrese el id del tercer tripulante \n"); ///FALTA VERIFICAR ESTADO
-        scanf("%i", &tripulante);
-
-        verificacion=chequeoAstronauta(tripulante);
-        switch(verificacion)
+        if(estadoDeNaveCambiado == 1)
         {
-        case 1:
-            printf("ASTRONAUTA ASIGNADO! \n");
-            tripulante=mision.IDtripulante_3;
-            break;
+            stNave nave;
+            FILE* archivo1;
+            int validacion =0;
 
-        case 2:
-            printf("EL ASATRONAUTA ESTA RETIRADO! \n");
-            printf("INGRESE OTRO ID \n");
-            scanf("%i", &tripulante);
-            verificacion=chequeoAstronauta(tripulante);
-            if(verificacion==1)
+            archivo1 = fopen("listaNave.bin", "r+b");
+            if(archivo1 != NULL)
             {
-                printf("ASTRONAUTA ASIGNADO CON EXITO!! \n");
-                tripulante=mision.IDtripulante_3;
 
-                break;
+                while(fread(&nave, sizeof(stNave), 1, archivo1) > 0 && validacion == 0)
+                {
+                    if(nave.ID == IDnaveIngresado)
+                    {
+
+                        nave.estado = 2;
+                        validacion = 1;
+
+                    }
+
+                }
+
+
+            }
+            else
+            {
+                printf("\nNo se pudo abrir el archivo");
+
             }
         }
+        MenuPrincipal();
 
-        printf("Ingrese detalles de la mision \n");
-        fflush(stdin);
-        scanf("%s", &mision.detalleDeLaMision);
-
-        mision.estado=1;
-
-        fwrite(&mision, sizeof(stMision), 1, archivo);
-        fclose(archivo);
     }
     else
     {
+        system("cls"); /// limpia la pantalla
+        printf("\n\nLa ID de la mision ya existe y no esta disponible\n");
 
-        printf("\nNO SE PUEDO ABRIR EL ARCHIVO");
+        printf("\ningresar cualquier valor para salir  o 1 para vovler a intentar:  ");
+        scanf("%i", &verificacionSalida);
+        if(verificacionSalida == 1 )
+        {
+            altaMision();
+
+        }
+        else
+        {
+
+            MenuPrincipal();
+
+        }
 
 
     }
 
 
-    MenuPrincipal();
 
 }
 
 void listadoMisiones()
 {
-    printf("\n LISTA DE MISIONES \n");
+
+    system("cls"); /// limpia la pantalla
+
+
+    printf("\n----------------\nLISTADO DE MISION:\n----------------\n\n");
 
     FILE* archivo;
     stMision mision;
@@ -273,17 +493,97 @@ void listadoMisiones()
     int i=0;
     int contador = 1;
 
-    archivo = fopen("listaAstronauta.bin", "rb");
+    archivo = fopen("ListaMisiones.bin", "rb");
 
     if(archivo != NULL)
     {
-        while (fread(&mision, sizeof(stMision), 1, archivo) > 0)
+        while (fread(&mision, sizeof(stMision), 1, archivo) == 1 )
         {
 
+
+
+
+
+
+
             printf("\n\nLISTADO:\n\n");
-            printf("MISION %i -> ID: %i \n -> NAVE: %i \n -> DESTINO: %s \n -> CARGAMENTO: %s \n -> TRIPULANTE 1: %s\n -> TRIPULANTE 2: %s\n -> TRIPULANTE 3: %s\n ----------------------------------------------------------\n", contador,mision.ID, mision.IDnave, mision.destino, mision.cargamento, mision.IDtripulante_1, mision.IDtripulante_2,  mision.IDtripulante_3);
+            printf("MISION %i -> ID: %i \n", contador,mision.ID);
+            printf("-> NAVE: %i \n", mision.IDnave);
+            switch(mision.destino)
+            {
+            case 1:
+                printf("-> DESTINO: Orbita Terrestre\n");
+                break;
+
+            case 2:
+                printf("-> DESTINO: Luna\n");
+                break;
+
+            case 3:
+                printf("-> DESTINO: Marte\n");
+                break;
+
+            case 4:
+                printf("-> DESTINO: Jupiter\n");
+                break;
+
+            case 5:
+                printf("-> DESTINO: Saturno\n");
+                break;
+
+            case 6:
+                printf("-> DESTINO: Urano\n");
+                break;
+
+            case 7:
+                printf("-> DESTINO: Neptuno\n");
+                break;
+            }
+            printf("-> CARGAMENTO: %s \n", mision.cargamento);
+            printf("-> ID TRIPULANTE 1: %i\n", mision.IDtripulante_1);
+            printf("-> ID TRIPULANTE 2: %i\n", mision.IDtripulante_2);
+            printf("-> ID TRIPULANTE 3: %i\n ----------------------------------------------------------\n",  mision.IDtripulante_3);
+            printf("-> ESTADO DE LA MISION: "); /// ( 1 = Listo,2 = En vuelo, 3 = Retornada, 4 =  Cancelada,  5 = Fallida 6 - finalizada)
+            switch(mision.estado)
+            {
+
+            case 0:
+
+                printf("En mantenimiento");
+                break;
+
+            case 1 :
+                printf("Listo");
+                break;
+
+            case 2 :
+                printf("En vuelo");
+                break;
+
+            case 3 :
+                printf("Retornada");
+                break;
+
+            case 4 :
+                printf("Cancelada");
+                break;
+
+            case 5 :
+                printf("Fallida");
+                break;
+
+            case 6:
+                printf("finalizada");
+                break;
+
+
+
+            }
+            printf("\n ----------------------------------------------------------\n");
+
             contador++;
         }
+
 
         fclose(archivo);
     }
@@ -291,163 +591,274 @@ void listadoMisiones()
     {
         printf("\nNo se pudo abrir el archivo\n");
     }
+
+    fflush(stdin);
+    int irMenu;
+    printf("\n\nIngresar un valor para volver al menu:  ");
+    scanf("%i", &irMenu);
+
+
+    MenuPrincipal();
+
+
+
+
 }
 
 void contasultaIDmision()
 {
+    system("cls"); /// limpia la pantalla
+    printf("\n----------------\nCONSULTA POR ID MISION:\n----------------\n\n");
     int consulta;
     stMision mision;
+    int salida = 0;
     FILE* buffer;
-    buffer = fopen("listaAstronauta.bin", "rb");
+    buffer = fopen("ListaMisiones.bin", "rb");
     if (buffer != NULL)
     {
-        printf("Ingrese el ID de la misiÛn que desea ver: ");
+        printf("\nIngrese el ID de la misi√≥n que desea ver: ");
         scanf("%i", &consulta);
 
-        int misionEncontrada = 0; // Variable para indicar si se encontrÛ una misiÛn con el ID dado
+        int misionEncontrada = 0; // Variable para indicar si se encontr√≥ una misi√≥n con el ID dado
 
-        while (fread(&mision, sizeof(stMision), 1, buffer) == 1)
+        while (fread(&mision, sizeof(stMision), 1, buffer) > 0 && salida == 0 )
         {
             if (mision.ID == consulta)
             {
-                printf("MISI”N CON ID %i:\n", mision.ID);
+                printf("MISION CON ID %i:\n", mision.ID);
                 printf("Nave: %i\n", mision.IDnave);
-                printf("Destino: %s\n", mision.destino);
+                switch(mision.destino)
+                {
+                case 1:
+                    printf("-> DESTINO: Orbita Terrestre\n");
+                    break;
+
+                case 2:
+                    printf("-> DESTINO: Luna\n");
+                    break;
+
+                case 3:
+                    printf("-> DESTINO: Marte\n");
+                    break;
+
+                case 4:
+                    printf("-> DESTINO: Jupiter\n");
+                    break;
+
+                case 5:
+                    printf("-> DESTINO: Saturno\n");
+                    break;
+
+                case 6:
+                    printf("-> DESTINO: Urano\n");
+                    break;
+
+                case 7:
+                    printf("-> DESTINO: Neptuno\n");
+                    break;
+                }
                 printf("Cargamento: %s\n", mision.cargamento);
-                printf("Tripulante 1: %s\n", mision.IDtripulante_1);
-                printf("Tripulante 2: %s\n", mision.IDtripulante_2);
-                printf("Tripulante 3: %s\n", mision.IDtripulante_3);
+                printf("Tripulante 1: %i\n", mision.IDtripulante_1);
+                printf("Tripulante 2: %i\n", mision.IDtripulante_2);
+                printf("Tripulante 3: %i\n", mision.IDtripulante_3);
+
+
+                printf("ESTADO DE LA MISION: "); /// ( 1 = Listo,2 = En vuelo, 3 = Retornada, 4 =  Cancelada,  5 = Fallida 6 - finalizada)
+                switch(mision.estado)
+                {
+
+                case 0:
+
+                    printf("En mantenimiento");
+                    break;
+
+                case 1 :
+                    printf("Listo");
+                    break;
+
+                case 2 :
+                    printf("En vuelo");
+                    break;
+
+                case 3 :
+                    printf("Retornada");
+                    break;
+
+                case 4 :
+                    printf("Cancelada");
+                    break;
+
+                case 5 :
+                    printf("Fallida");
+                    break;
+
+                case 6:
+                    printf("finalizada");
+                    break;
+
+
+
+                }
+
+                Sleep(5000); /// proceso espere durante aproximadamente 5 segundos
 
                 misionEncontrada = 1;
-                break; // Se encontrÛ la misiÛn, se puede salir del bucle
+                salida = 1;
+                break; // Se encontr√≥ la misi√≥n, se puede salir del bucle
             }
         }
 
         fclose(buffer);
 
-        if (!misionEncontrada)
+        if (misionEncontrada == 0)
         {
-            printf("LA MISION NO FUE ENCONTRADA\n");
+            system("cls"); /// limpia la pantalla
+            printf("\n\nLA MISION NO FUE ENCONTRADA\n\n");
         }
     }
     else
     {
         printf("No se pudo abrir el archivo\n");
     }
+
+    int irMenu;
+    printf("\n\nIngresar un valor para volver al menu:  ");
+    scanf("%i", &irMenu);
+    MenuPrincipal();
+
 }
 
 
 void bajaMision()
 {
-    int id1;
-    int id2;
-    int id3;
-    int idnave;
+
+    system("cls"); /// limpia la pantalla
+    printf("\n----------------\nBAJA MISION:\n----------------\n\n");
     int condicion1=0;
-    int condicion2=0;
+
+
+    int id1, id2, id3, idNave, desicion;
 
 
     stNave nave;
     stMision mision;
-    stAstronauta astronauta;
 
-    int desicion;
-    int cancelar;
 
-    FILE* buffer;
-    buffer=fopen("ListaMisiones.bin", "r+b");
-    if(buffer != NULL)
+
+    int cancelarID;
+    int estadoPermitido;
+
+    printf("Ingrese el ID de la mision que desea cancelar \n");
+    scanf("%i", &cancelarID);
+
+    int validacion = estadoDeLaMision(cancelarID);
+
+
+    if(validacion == 1)
     {
-        printf("Ingrese el ID de la mision que desea cancelar \n");
-        scanf("%i", &cancelar);
 
-        while (fread(&mision, sizeof(stMision), 1, buffer) > 1)
+        FILE* buffer;
+        buffer=fopen("ListaMisiones.bin", "r+b");
+        if(buffer != NULL)
         {
-            if (mision.ID == cancelar)
+
+
+            while (fread(&mision, sizeof(stMision), 1, buffer) > 0)
             {
-                printf("MISION CON ID %i -> nave: %i \n -> DESTINO: %s \n -> CARGAMENTO: %s \n -> TRIPULANTE 1: %s\n -> TRIPULANTE 2: %s\n -> TRIPULANTE 3: %s\n ----------------------------------------------------------\n", mision.ID, mision.IDnave, mision.destino, mision.cargamento, mision.IDtripulante_1, mision.IDtripulante_2, mision.IDtripulante_3);
-                condicion1 = 1;
-                break; // Se encontrÛ la misiÛn, se puede salir del bucle
+                if (mision.ID == cancelarID)
+                {
+
+
+
+
+                    printf("\nID ENCONTRADA\n\n");
+
+
+
+
+                    printf("\n\nESTA SEGURO QUE DESEA CANCELAR LA MISION? \n 1->SI   2->NO\n\nIGRESAR OPCION: ");
+                    scanf("%i", &desicion);
+
+                    if(desicion==1)
+                    {
+                        mision.estado=4;
+                        idNave = mision.IDnave;
+
+                        mision.IDnave = 0;
+                        id1 = mision.IDtripulante_1;
+                        id2 = mision.IDtripulante_2;
+                        id3 = mision.IDtripulante_3;
+                        fseek(buffer, -sizeof(stMision), SEEK_CUR);
+                        fwrite(&mision, sizeof(stMision), 1, buffer);
+                        fclose(buffer);
+
+                    }
+                    else
+                    {
+                        fclose(buffer);
+                        printf("\n\nUsted ingreso no\nSe volvera al menu\n");
+
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        MenuPrincipal();
+
+                    }
+                }
+
+
             }
-        }
 
-        if (!condicion1)
+
+            fclose(buffer);
+        }
+        else
         {
-            printf("LA MISION NO FUE ENCONTRADA \n");
+            printf("\nNO SE PUDO ABRIR EL ARCHIVO \n");
+
         }
 
-        printf("ESTA SEGURO QUE DESEA CANCELAR LA MISION? \n 1->SI   2->NO");
-        scanf("%i", &desicion);
-        if(desicion==1)
+
+        if(desicion == 1)
         {
-            mision.estado=4;
+
+            modificacionDeAstronautaMisionCancelada(id1);
+            modificacionDeAstronautaMisionCancelada(id2);
+            modificacionDeAstronautaMisionCancelada(id3);
+
+            modificarEstadoDeLaNavePorMisionCancelada(idNave);
+            system("cls"); /// limpia la pantalla
+            printf("\n\nLA BAJA DE LA MISION FUE EXITOSA ");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
         }
 
-        idnave=mision.IDnave;
-        id1=mision.IDtripulante_1;
-        id2=mision.IDtripulante_2;
-        id3=mision.IDtripulante_3;
 
-        fwrite(&mision, sizeof(stMision), 1, buffer);
-        fclose(buffer);
+
+
+    }
+    else if(validacion == 6)
+    {
+
+        system("cls"); /// limpia la pantalla
+        printf("\nLA MISION YA ESTA FINALIZADA");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+    }
+    else if(validacion == -1)
+    {
+        system("cls"); /// limpia la pantalla
+        printf("\nLa id ingresada no existe");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
     }
     else
     {
-        printf("NO SE PUDO ABRIR EL ARCHIVO \n");
-        MenuPrincipal();
+        system("cls"); /// limpia la pantalla
+        printf("\nLa mision no esta en condiciones de dar de baja ");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
     }
 
-    ///MODIFICO ESTADO ASTRONAUTAS
-    FILE* archi;
-    archi=fopen("listaAstronauta.bin", "wb+");
-    if(archi != NULL)
-    {
-        while(fread(&astronauta, sizeof(stAstronauta), 1, archi)==1)
-        {
-            if(id1==astronauta.ID)
-            {
-                astronauta.estado=1;
-                fseek(archi, -sizeof(stAstronauta), SEEK_CUR);
-                fwrite(&astronauta, sizeof(stAstronauta), 1, archi);
-            }
+    MenuPrincipal();
 
-            if(id2==astronauta.ID)
-            {
-                astronauta.estado=1;
-                fseek(archi, -sizeof(stAstronauta), SEEK_CUR);
-                fwrite(&astronauta, sizeof(stAstronauta), 1, archi);
-            }
-
-            if(id3==astronauta.ID)
-            {
-                astronauta.estado=1;
-                fseek(archi, -sizeof(stAstronauta), SEEK_CUR);
-                fwrite(&astronauta, sizeof(stAstronauta), 1, archi);
-            }
-        }
-        fclose(archi);
-    }
-
-    FILE* archivo;
-    archivo = fopen("listaNave.bin", "rb+");
-    if (archivo != NULL)
-    {
-        while (fread(&nave, sizeof(stNave), 1, archivo) == 1 && condicion2 == 0)
-        {
-            if (idnave == nave.ID)
-            {
-                nave.estado = 1;
-                condicion2 = 1;
-            }
-        }
-        fseek(archivo, -sizeof(stNave), SEEK_CUR);
-        fwrite(&nave, sizeof(stNave), 1, archivo);
-        fclose(archivo);
-    }
-    else
-    {
-        printf("\nNo se pudo abrir el archivo\n");
-    }
 
 }
 
@@ -459,41 +870,59 @@ void bajaMision()
 
 void despegueDeMision()
 {
+    system("cls"); /// limpia la pantalla
+    printf("\n----------------\nDESPEGUE DE MISION:\n----------------\n\n");
 
     int misionID, confirmarDespege;
 
     int idNave;
+    int misionFaliidaConfirmacion = 0;
 
     stMision misiones;
 
     fflush(stdin);
 
-    printf("\nINICIO DE LA MISION\n\n\ningresar La id de la mision:\n");
+    printf("\nINICIO DE LA MISION\n\n\ningresar La ID de la mision:\n");
     scanf("%i",&misionID);
 
-    int validacion = verificacionDeMisionEntrada(misionID);
-    int destino = retornarHorasSegunDestinoDeLaMision(misionID);
 
-    int tipoDeNaveDespegue = detectarModeloDeLaNaveConIDMision(misionID);
+    int validacion = verificacionDeMisionEntrada(misionID);
+
+
+
+
+
 
 
 
     if(validacion == 1 )
     {
 
-        printf("\nLa nave esta en condiciones de despqgar:\n");
+        int tipoDeNaveDespegue = detectarModeloDeLaNaveConIDMision(misionID);
+
+        int destino = retornarHorasSegunDestinoDeLaMision(misionID);
+
+        printf("\n\nLa mision esta en condiciones de iniciar:\n");
 
         int piloto1ID, piloto2ID, piloto3ID;
 
 
-        idNave = retornarIDnaveconLaIDmision(misionID);
+        idNave = retornarIDnaveconLaIDmision(misionID); /// esta BIEN
+
+
+
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 
         piloto1ID = retornarIdDePiolotoConIDdeMision(misionID, 1);
         piloto2ID = retornarIdDePiolotoConIDdeMision(misionID, 2);
         piloto3ID = retornarIdDePiolotoConIDdeMision(misionID, 3);
 
-        printf("\nIngresar UNO para confirmar el despeque:  ");
+
+
+        printf("\nIngresar UNO para confirmar el despeque: \n\n      confirmar despegue:  ");
         scanf("%i", &confirmarDespege);
+        fflush(stdin);
 
         if(confirmarDespege == 1)
         {
@@ -569,6 +998,7 @@ void despegueDeMision()
                     bajaDeAstronautaPorMuerte(piloto2ID);
                     bajaDeAstronautaPorMuerte(piloto3ID);
                     estadoDenaveBaja(idNave);
+                    misionFaliidaConfirmacion = 1;
 
                 }
                 else if(estadoDeDespegue == 2)
@@ -581,7 +1011,8 @@ void despegueDeMision()
                     altaAstronautaMisionViaje(piloto2ID, destino);
                     altaAstronautaMisionViaje(piloto3ID, destino);
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    estadoDenaveEnMision(idNave);
+
+                    estadoDenaveEnMision(idNave, destino);
                 }
 
 
@@ -631,6 +1062,7 @@ void despegueDeMision()
                     bajaDeAstronautaPorMuerte(piloto2ID);
                     bajaDeAstronautaPorMuerte(piloto3ID);
                     estadoDenaveBaja(idNave);
+                    misionFaliidaConfirmacion = 1;
 
                 }
                 else if(estadoDeDespegue == 2)
@@ -643,7 +1075,8 @@ void despegueDeMision()
                     altaAstronautaMisionViaje(piloto2ID, destino);
                     altaAstronautaMisionViaje(piloto3ID, destino);
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    estadoDenaveEnMision(idNave);
+
+                    estadoDenaveEnMision(idNave, destino);
 
 
                 }
@@ -695,6 +1128,7 @@ void despegueDeMision()
                     bajaDeAstronautaPorMuerte(piloto2ID);
                     bajaDeAstronautaPorMuerte(piloto3ID);
                     estadoDenaveBaja(idNave);
+                    misionFaliidaConfirmacion = 1;
 
 
                 }
@@ -708,7 +1142,7 @@ void despegueDeMision()
                     altaAstronautaMisionViaje(piloto2ID, destino);
                     altaAstronautaMisionViaje(piloto3ID, destino);
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    estadoDenaveEnMision(idNave);
+                    estadoDenaveEnMision(idNave, destino);
 
 
                 }
@@ -716,20 +1150,36 @@ void despegueDeMision()
 
 
             FILE* archivo;
+            int salidaListado =0;
 
-            archivo = fopen("listaMision.bin","r+b");
+            archivo = fopen("ListaMisiones.bin","r+b");
 
             if(archivo != NULL)
             {
 
-                while(fread(&misiones, sizeof(stMision), 1, archivo)>0)
+                while(fread(&misiones, sizeof(stMision), 1, archivo)>0 && salidaListado == 0)
                 {
 
                     if(misionID == misiones.ID)
                     {
 
+                        if(misionFaliidaConfirmacion == 0)
+                        {
 
-                        misiones.estado = 2;
+                            misiones.estado = 2;
+
+                        }
+                        else if(misionFaliidaConfirmacion == 1)
+                        {
+
+                            misiones.estado = 5;
+
+                        }
+                        fseek(archivo, -sizeof(stMision), SEEK_CUR);
+                        fwrite(&misiones, sizeof(stMision), 1, archivo);
+                        fclose(archivo);
+
+                        salidaListado =1;
 
 
 
@@ -737,6 +1187,9 @@ void despegueDeMision()
 
 
                 }
+
+
+
 
                 fclose(archivo);
 
@@ -747,44 +1200,57 @@ void despegueDeMision()
             else
             {
 
+                printf("\nNo se pudo abrir el archivo\n");
 
-                printf("\n SE DIO DE BAJA LA MISION\N");
-                system("cls"); /// limpia la pantall
-                Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                MenuPrincipal();
 
             }
 
 
         }
-        else if(validacion == 0)
-        {
-
-            printf("\nLA ID NO EXISTE\n");
-
-
-        }
-
         else
         {
 
-            printf("\nLa nave no esta en condicones de partir \n");
-            MenuPrincipal();
+            printf("\n SE DIO DE BAJA LA MISION\N");
+            system("cls"); /// limpia la pantall
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
 
         }
-    }else{
-
-     system("cls"); /// limpia la pantalla
 
 
-    printf("\nLa ID de la mision no se encontro \n");
 
-    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+    }
+    else if(validacion == 0)
+    {
+        system("cls"); /// limpia la pantalla
+        printf("\nLA ID NO EXISTE\n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+        MenuPrincipal();
+
+
+
+    }
+    else
+    {
+
+        system("cls"); /// limpia la pantalla
+        printf("\nLa mision no esta en condiciones de iniciar \n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+        MenuPrincipal();
+
+
+
+    }
 
     MenuPrincipal();
 
-    }
+
+
+
 }
+
 
 
 void retornoDeLaMision()
@@ -792,23 +1258,50 @@ void retornoDeLaMision()
 
 
     int misionID, confirmarDespege;
+    int piloto1ID, piloto2ID, piloto3ID;
+    int idNave;
+    int destino;
+
+
 
     stMision misiones;
 
     fflush(stdin);
+    system("cls"); /// limpia la pantalla
+    printf("\n----------------\nRETORNO DE LA MISION:\n----------------\n\n\n\ningresar La id de la mision:\n");
+    scanf("%i",&misionID);
 
-    printf("\nINICIO DE LA MISION\n\n\ningresar La id de la mision:\n");
-    scanf("&i",&misionID);
+    fflush(stdin);
 
     int validacion = verificacionDeMisionEntrada(misionID);
+
+
 
     if(validacion == 2)   /// dos es en vuelo
     {
 
+        destino = retornarHorasSegunDestinoDeLaMision(misionID);
+        piloto1ID = retornarIdDePiolotoConIDdeMision(misionID, 1);
+        piloto2ID = retornarIdDePiolotoConIDdeMision(misionID, 2);
+        piloto3ID = retornarIdDePiolotoConIDdeMision(misionID, 3);
+
+
+        idNave = retornarIDnaveconLaIDmision(misionID); /// esta BIEN
+
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+        retornoAstronautaMisionViaje(piloto1ID, destino);
+        retornoAstronautaMisionViaje(piloto2ID, destino);
+        retornoAstronautaMisionViaje(piloto3ID, destino);
+
+
+        estadoDenaveEnretorno(idNave, destino);
+
+
+
 
         FILE* archivo;
 
-        archivo = fopen("listaMision.bin","r+b");
+        archivo = fopen("ListaMisiones.bin","r+b");
 
         if(archivo != NULL)
         {
@@ -821,12 +1314,21 @@ void retornoDeLaMision()
 
                     system("cls"); /// limpia la pantalla
 
-                    printf("\nLA NAVE ESRA RETORNANDO\n");
+                    printf("\nLA NAVE ESTA RETORNANDO\n");
 
-                    misiones.estado = 1;
+                    misiones.estado = 6;  /// 6 es igual a finalizada
+
+
+
+                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+                    fseek(archivo, -sizeof(stMision), SEEK_CUR);
+                    fwrite(&misiones, sizeof(stMision), 1, archivo);
 
                     system("cls"); /// limpia la pantalla
+                    printf("\nLA NAVE RETORNO CON EXITO, ESTARA EN MANTENIMIENTO\n");
 
+                    fclose(archivo);
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 
                 }
@@ -848,18 +1350,134 @@ void retornoDeLaMision()
 
 
     }
-    else if(validacion == 0)
+    else if(validacion == 0 || validacion == 1 || validacion == 3  || validacion == 5 || validacion == 6) /// ( 1 = Listo,2 = En vuelo, 3 = Retornada, 4 =  Cancelada,  5 = Fallida 6 = finalizada)
     {
+        system("cls"); /// limpia la pantalla
+        printf("\nNo esta en condiciones de retornar la nave\n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 
-        printf("\n\nId de la mision inexistente\n");
 
     }
     else
     {
 
-        printf("\nNo esta en condiciones de retornar la nave\n");
+        system("cls"); /// limpia la pantalla
+        printf("\n\nId de la mision inexistente\n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 
     }
+
+
+
+
+
+
+
+    MenuPrincipal();
+
+}
+
+
+void sacarDeMantenimiento()
+{
+
+    int valorID, confirmarSalidaDeMantenimiento;
+    system("cls"); /// limpia la pantalla
+    printf("\n----------------\nTALLER SPACEX:\n----------------\n\n\n");
+    printf("\n\nIngresar la id de la nave que quieras poner en servivio\n\n INGRESAR VALOR:  ");
+    scanf("%i", &valorID);
+
+    int estadoNave = verificacionDeEstadoDeLaNave(valorID);
+
+    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+    if(estadoNave == 0)
+    {
+
+        printf("\n\nLa nave con la ID: %i , esta en mantenimeinto:\n\nIngresar un UNO para ponerlo en servicio: \n        Ingresar opcion: ", valorID);
+        scanf("%i", &confirmarSalidaDeMantenimiento);
+        if(confirmarSalidaDeMantenimiento == 1)
+        {
+
+            /// modificar estado de la nave, para que se pueda volve a usar
+            stNave nave;
+
+            FILE* archivo;
+            archivo = fopen("listaNave.bin","r+b");
+            if(archivo != NULL)
+            {
+
+                while(fread(&nave, sizeof(stNave), 1, archivo)>0)
+                {
+
+                    if(valorID == nave.ID)
+                    {
+
+                        nave.estado = 1;
+                        fseek(archivo, -sizeof(stNave), SEEK_CUR);
+                        fwrite(&nave, sizeof(stNave), 1, archivo);
+                        fclose(archivo);
+                        system("cls"); /// limpia la pantalla
+                        printf("\nLa nave fue dada de alta con exito");
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+                    }
+
+
+                }
+                fclose(archivo);
+
+            }
+            else
+            {
+
+                printf("\nNo se pudo abrir el archivo");
+
+            }
+
+
+
+
+            establecerMisionEnFinalizada(valorID);
+
+        }
+        else
+        {
+            system("cls"); /// limpia la pantalla
+
+
+            printf("\nNo se confirmo la operacion.");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+            MenuPrincipal();
+
+        }
+
+
+
+
+        MenuPrincipal();
+
+
+    }
+    else if(estadoNave == -1)
+    {
+
+        system("cls"); /// limpia la pantalla
+        printf("\nLa ID de la nave no existe no se puede dar de baja \n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+
+    }
+    else
+    {
+
+        system("cls"); /// limpia la pantalla
+        printf("\nLa nave no esta en condiciones de dar de baja\n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+    }
+
+    MenuPrincipal();
+
 
 
 }
@@ -867,40 +1485,78 @@ void retornoDeLaMision()
 
 ///---------------------
 
+int estadoDeLaMision(int ID)
+{
+    int salida =-1;
+    FILE* archivo;
+    stMision mision;
+
+    archivo = fopen("ListaMisiones.bin", "rb");
+
+    if (archivo != NULL)
+    {
+        while(fread(&mision, sizeof(stMision), 1, archivo)>0)
+        {
+            if (ID == mision.ID)
+            {
+                salida = mision.estado;
+                fclose(archivo);
+
+            }
+        }
+
+        fclose(archivo);
+    }
+
+
+    return salida;
+}
+
+
+
 int chequeoEstadoNave (int id)
 {
     stNave nave;
-    int estado;
+    int estado= -1;
     FILE *archi;
+    int salida =0;
+
     archi=fopen("listaNave.bin","rb");
+
     if(archi!= NULL)
     {
-        while((fread(&nave, sizeof (stNave), 1, archi))==1)
+        while((fread(&nave, sizeof (stNave), 1, archi))>0 )
         {
-            if (id== nave.ID)
+            if (id == nave.ID)
             {
                 estado=nave.estado;
-                fclose(archi);
-                return estado;
+                salida =1;
+
+
+
             }
         }
+        fclose(archi);
     }
+
+    return estado;
 }
 
 int chequeoAstronauta(int id)
 {
     int estado;
+    int salida = 0;
     stAstronauta astronauta;
     FILE* archivo;
     archivo = fopen("listaAstronauta.bin", "rb");
     if (archivo != NULL)
     {
-        while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) > 0)
+        while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) > 0 && salida == 0)
         {
             if (id == astronauta.ID)
             {
                 estado = astronauta.estado;
-                break;
+                salida = 1;
             }
         }
 
@@ -911,112 +1567,382 @@ int chequeoAstronauta(int id)
 }
 
 
-
-
-
-///----------------------
-
-/// retornar las hoiras de vuelo segun la mision
-
-
-int estadoDeDespegueResultado()
+void establecerAlAstronautaEnModoListoParaOtraMision(int ID)
 {
-    srand(time(NULL));
 
-    int resultado = rand() % 10 + 1;
-
-    if (resultado <= 3)
-    {
-        return 3;
-        return 2;
-    }
-}
-
-
-int retornarHorasSegunDestinoDeLaMision(int misionID)
-{
 
     FILE* archivo;
+    stAstronauta astronauta;
+    archivo = fopen("listaAstronauta.bin", "r+b");
 
-    stMision mision;
-
-    int salida = 0;
-
-    archivo = fopen("listaMision.bin","rb" );
-
-
-    if(archivo=! NULL)
+    if(archivo != NULL)
     {
 
-        while(fread(&mision, sizeof(stMision), 1, archivo)>0)
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)> 0)
         {
 
-            if(misionID == mision.ID)
+            if(ID == astronauta.ID)
             {
 
-
-                switch(mision.destino)
-                {
-
-                case 1 :
-
-                    salida  = 9;
-
-                    break;
-
-                case 2:
-
-                    salida = 72;
-
-                    break;
-
-                case 3:
-
-                    salida = 5226;
-
-                case 4:
-
-                    salida = 21900;
-
-                case 5:
-
-                    salida = 56940;
-
-                case 6:
-
-                    salida = 96360;
-
-                case 7:
-
-                    salida = 113880;
-
-
-
-                }
-
+                astronauta.estado = 1;
+                fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
+                fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
+                fclose(archivo);
 
             }
 
-
         }
-
         fclose(archivo);
-
 
     }
     else
     {
 
-        printf("\nEl archivo no se pudo ejecuar\n");
+        printf("\nNo se pudo abrir el archivo\n");
 
     }
 
-    return salida;
+
 
 
 }
 
 
+void cambiarElEstadoDeLaNaveMantenimiento(int ID)
+{
+
+
+    FILE* archivo;
+    stNave nave;
+    archivo = fopen("listaNave.bin.bin", "r+b");
+
+    if(archivo != NULL)
+    {
+
+        while(fread(&nave, sizeof(stNave), 1, archivo)> 0)
+        {
+
+            if(ID == nave.ID)
+            {
+
+                nave.estado = 0;
+                fseek(archivo, -sizeof(stNave), SEEK_CUR);
+                fwrite(&nave, sizeof(stNave), 1, archivo);
+                fclose(archivo);
+
+            }
+
+        }
+        fclose(archivo);
+
+    }
+    else
+    {
+
+        printf("\nNo se pudo abrir el archivo\n");
+
+    }
+
+
+
+}
+
+void modificarEstadoDeAstronautaAMisionAsignada(int ID)
+{
+
+
+    stAstronauta astronauta;
+
+    FILE* archivo;
+
+
+    archivo = fopen("listaAstronauta.bin","r+b");
+
+    if(archivo != NULL)
+    {
+
+
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0)
+        {
+
+            if(astronauta.ID == ID)
+            {
+
+                astronauta.estado = 5;
+                fseek(archivo, -sizeof(stAstronauta),SEEK_CUR);
+                fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
+                fclose(archivo);
+
+            }
+
+        }
+        fclose(archivo);
+
+
+
+    }
+
+}
+
+void cambiarEstadoDeLaNaveAMisionAsignada(int ID)
+{
+
+    stNave nave;
+
+    FILE* archivo;
+
+
+    archivo = fopen("listaNave.bin","r+b");
+
+    if(archivo != NULL)
+    {
+
+
+        while(fread(&nave, sizeof(stNave), 1, archivo)>0)
+        {
+
+            if(nave.ID == ID)
+            {
+
+                nave.estado = 4;
+                fseek(archivo, -sizeof(stNave),SEEK_CUR);
+                fwrite(&nave, sizeof(stNave), 1, archivo);
+                fclose(archivo);
+
+            }
+
+        }
+        fclose(archivo);
+
+
+
+    }
+
+
+}
+
+///----------------------
+
+void modificacionDeAstronautaMisionCancelada(int ID)
+{
+
+
+    stAstronauta astronauta;
+    ///MODIFICO ESTADO ASTRONAUTAS
+    FILE* archi;
+    archi=fopen("listaAstronauta.bin", "r+b");
+    if(archi != NULL)
+    {
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archi)>0)
+        {
+            if( ID==astronauta.ID)
+            {
+                astronauta.estado=1;
+                fseek(archi, -sizeof(stAstronauta), SEEK_CUR);
+                fwrite(&astronauta, sizeof(stAstronauta), 1, archi);
+                fclose(archi);
+            }
+
+
+        }
+        fclose(archi);
+
+    }
+    else
+    {
+
+        printf("No se pudo abrir el archivo ");
+
+    }
+
+
+}
+
+
+void modificarEstadoDeLaNavePorMisionCancelada(int ID)
+{
+
+
+    stNave nave;
+    FILE* archivo;
+    archivo = fopen("listaNave.bin", "r+b");
+    if (archivo != NULL)
+    {
+        while (fread(&nave, sizeof(stNave), 1, archivo) > 0  )
+        {
+            if (ID == nave.ID)
+            {
+                nave.estado = 1;
+
+                fseek(archivo, -sizeof(stNave), SEEK_CUR);
+                fwrite(&nave, sizeof(stNave), 1, archivo);
+                fclose(archivo);
+
+            }
+        }
+
+        fclose(archivo);
+    }
+    else
+    {
+        printf("\nNo se pudo abrir el archivo\n");
+    }
+    system("cls"); /// limpia la pantalla
+
+
+
+}
+
+
+int estadoDeDespegueResultado()
+{
+    srand(time(NULL));  // Inicializar la semilla aleatoria
+
+    int resultado = rand() % 10;  // Generar un n√∫mero aleatorio entre 0 y 9
+
+    if (resultado < 2)
+    {
+        return 3;  // Despegue fallido (20% de las veces)
+    }
+    else
+    {
+        return 2;  // Despegue exitoso (80% de las veces)
+    }
+}
+
+int retornarHorasSegunDestinoDeLaMision(int misionID)
+{
+    FILE* archivo;
+    stMision mision;
+    int salida = 0;
+    archivo = fopen("ListaMisiones.bin", "rb");
+
+    if (archivo != NULL)
+    {
+        while (fread(&mision, sizeof(stMision), 1, archivo) > 0)
+        {
+            if (misionID == mision.ID)
+            {
+                switch (mision.destino)
+                {
+                case 1:
+                    salida = 9;
+                    break;
+                case 2:
+                    salida = 72;
+                    break;
+                case 3:
+                    salida = 5226;
+                    break;
+                case 4:
+                    salida = 21900;
+                    break;
+                case 5:
+                    salida = 56940;
+                    break;
+                case 6:
+                    salida = 96360;
+                    break;
+                case 7:
+                    salida = 113880;
+                    break;
+                }
+                break;  // Salir del bucle una vez que se encuentra la coincidencia
+            }
+        }
+        fclose(archivo);
+    }
+    else
+    {
+        printf("\nEl archivo no se pudo ejecutar\n");
+    }
+
+    return salida;
+}
+
+
+
+void establecerMisionEnFinalizada(int valorID)
+{
+
+
+    FILE* archivo;
+
+    stMision mision;
+
+    int salida;
+
+    archivo = fopen("ListaMisiones.bin","rb");
+
+    if(archivo != NULL)
+    {
+
+        while(fread(&mision, sizeof(stMision), 1, archivo)>0)
+        {
+
+            if(valorID == mision.IDnave)
+            {
+
+                mision.estado = 6;
+                fseek(archivo, -sizeof(stMision), SEEK_CUR);
+                fwrite(&mision, sizeof(stMision), 1, archivo);
+                fclose(archivo);
+
+            }
+
+
+        }
+        fclose(archivo);
+
+    }
+    else
+    {
+
+        printf("No se pudo ejecutar el archivo");
+
+    }
+
+
+
+
+
+
+}
+
+
+/// VERIFICAR QUE LA ID DE LA MISION NO EXISTA
+
+int verificacionDeIDMISION(int entrada)
+{
+
+    FILE* archivo;
+
+    stMision misiones;
+    int salida = 0;
+
+    archivo = fopen("ListaMisiones.bin", "rb");
+
+    if(archivo != NULL)
+    {
+
+        while(fread(&misiones, sizeof(stMision), 1, archivo)>0)
+        {
+
+            if(entrada == misiones.ID)
+            {
+
+                salida = 1;
+
+            }
+
+        }
+
+        fclose(archivo);
+
+    }
+    return salida;
+
+}
 
 
 /// ID NAVE TENIENDO EL DATO DE LA ID MISION
@@ -1030,7 +1956,7 @@ int retornarIDnaveconLaIDmision(int misionID)
 
     int salida;
 
-    archivo = fopen("listaMision.bin","rb");
+    archivo = fopen("ListaMisiones.bin","rb");
 
     if(archivo != NULL)
     {
@@ -1091,6 +2017,7 @@ void estadoDenaveBaja(int idNave)
                 condicion = 1;
                 fseek(archivo, -sizeof(stNave), SEEK_CUR);
                 fwrite(&nave, sizeof(stNave), 1, archivo);
+                fclose(archivo);
 
             }
 
@@ -1098,6 +2025,7 @@ void estadoDenaveBaja(int idNave)
 
 
         }
+        fclose(archivo);
 
 
     }
@@ -1111,9 +2039,9 @@ void estadoDenaveBaja(int idNave)
 
 }
 
-/// ESTADO DE NAVE EN MISION
+/// ESTADO DE NAVE EN MISION, suma de horas de vuelo
 
-void estadoDenaveEnMision(int idNave)
+void estadoDenaveEnMision(int idNave, int destino)
 {
 
     FILE* archivo;
@@ -1137,9 +2065,12 @@ void estadoDenaveEnMision(int idNave)
 
                 nave.estado = 2;
                 condicion = 1;
+                nave.horasDeVueloAcumuladas = nave.horasDeVueloAcumuladas + destino;
+                nave.cantidadDeVuelosRealizados++;
 
                 fseek(archivo, -sizeof(stNave), SEEK_CUR);
                 fwrite(&nave, sizeof(stNave), 1, archivo);
+                fclose(archivo);
 
             }
 
@@ -1147,6 +2078,60 @@ void estadoDenaveEnMision(int idNave)
 
 
         }
+        fclose(archivo);
+
+
+
+    }
+    else
+    {
+
+        printf("\nNo se pudo ejecutar el archivo\n");
+
+    }
+
+
+}
+
+void estadoDenaveEnretorno(int idNave,int destino)
+{
+
+    FILE* archivo;
+
+    stNave nave;
+
+    int condicion = 0;
+
+
+
+    archivo = fopen("listaNave.bin", "r+b");
+
+    if(archivo != NULL)
+    {
+
+        while(fread(&nave, sizeof(stNave), 1, archivo)>0 && condicion == 0)
+        {
+
+            if(idNave == nave.ID)
+            {
+
+                nave.estado = 0;
+                condicion = 1;
+                nave.horasDeVueloAcumuladas = nave.horasDeVueloAcumuladas + destino;
+                nave.cantidadDeVuelosRealizados++;
+
+                fseek(archivo, -sizeof(stNave), SEEK_CUR);
+                fwrite(&nave, sizeof(stNave), 1, archivo);
+                fclose(archivo);
+
+            }
+
+
+
+
+        }
+        fclose(archivo);
+
 
 
     }
@@ -1170,15 +2155,16 @@ int retornarIdDePiolotoConIDdeMision(int misionID, int NumeroPiloto)
     int salida;
 
     FILE* archivo;
+    int salidaWhile = 0;
 
     stMision mision;
 
-    archivo = fopen("listaMision.bin", "rb");
+    archivo = fopen("ListaMisiones.bin", "rb");
 
     if(archivo != NULL)
     {
 
-        while(fread(&mision, sizeof(stMision), 1, archivo)>0)
+        while(fread(&mision, sizeof(stMision), 1, archivo)>0 && salidaWhile == 0)
         {
 
             if(mision.ID == misionID)
@@ -1202,6 +2188,7 @@ int retornarIdDePiolotoConIDdeMision(int misionID, int NumeroPiloto)
                     salida = mision.IDtripulante_3;
 
                 }
+                salidaWhile = 1;
 
             }
 
@@ -1226,48 +2213,31 @@ int retornarIdDePiolotoConIDdeMision(int misionID, int NumeroPiloto)
 
 int detectarModeloDeLaNaveConIDMision(int misionID)
 {
-
     FILE* archivo;
-
     stMision mision;
-
     int idNave;
-
-    int salida=0;
-
-    archivo = fopen("listaMision.bin","rb");
-
-    if(archivo!=NULL)
+    int salida = 0;
+    int validacion = 0;
+    archivo = fopen("ListaMisiones.bin", "rb");
+    if (archivo != NULL)
     {
-
-        while(fread(&mision, sizeof(stMision), 1, archivo)>0)
+        while (fread(&mision, sizeof(stMision), 1, archivo) > 0 && validacion == 0)
         {
 
-            if(misionID == mision.ID)
+            if (misionID == mision.ID)
             {
-
                 idNave = mision.IDnave;
-
                 salida = detectarModeloDeNave(idNave);
-
+                validacion = 1;
             }
-
         }
-
         fclose(archivo);
-
-
     }
     else
     {
-
         printf("\nEl archivo no se pudo ejecutar\n");
-
     }
-
     return salida;
-
-
 }
 
 
@@ -1276,56 +2246,86 @@ int detectarModeloDeLaNaveConIDMision(int misionID)
 
 void altaAstronautaMisionViaje(int astronautaID, int destino)
 {
-
     FILE* archivo;
-
-    archivo = fopen("listaAstronauta.bin","r+b");
-
+    archivo = fopen("listaAstronauta.bin", "r+b");
     stAstronauta astronauta;
+    int condicion = 0;
 
-    int codicion = 0;
 
-    if(archivo != NULL)
+
+    if (archivo != NULL)
     {
-
-
-
-
-
-        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0 && codicion == 0)
+        while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) > 0)
         {
-
-            if(astronauta.ID == astronautaID)
+            if (astronauta.ID == astronautaID)
             {
+                astronauta.estado = 3;
 
-                astronauta.ID = 3;
-                codicion = 1;
-                astronauta.horasDeVueloAcumuladas = astronauta.horasDeVueloAcumuladas + destino;
+
+                astronauta.horasDeVueloAcumuladas = astronauta.horasDeVueloAcumuladas + destino; /// problemas en esta parte
                 astronauta.horasAcumuladasEnElEspacioInternacioal = astronauta.horasAcumuladasEnElEspacioInternacioal + destino;
+                astronauta.misionesEspecialesRealizadas ++;
+
 
                 fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
                 fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
-
-
+                fclose(archivo);
             }
-
         }
 
-
-
-
         fclose(archivo);
-
-
-
-
     }
     else
     {
-
-        printf("\nNo se pudo abirir el archivo\n");
-
+        printf("\nNo se pudo abrir el archivo\n");
     }
+}
+
+void retornoAstronautaMisionViaje(int astronautaID, int destino)
+{
+
+
+    FILE* archivo;
+    archivo = fopen("listaAstronauta.bin", "r+b");
+    stAstronauta astronauta;
+    int condicion = 0;
+    int suma1, suma2;
+
+
+
+    if (archivo != NULL)
+    {
+        while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) > 0)
+        {
+            if (astronauta.ID == astronautaID)
+            {
+                suma1 = astronauta.horasDeVueloAcumuladas;
+                suma2 = astronauta.horasAcumuladasEnElEspacioInternacioal;
+
+                astronauta.estado = 1;
+
+
+                astronauta.horasDeVueloAcumuladas = suma1 + destino; /// problemas en esta parte
+                astronauta.horasAcumuladasEnElEspacioInternacioal = suma2 + destino;
+
+
+
+                fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
+                fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
+                fclose(archivo);
+            }
+        }
+
+        fclose(archivo);
+    }
+    else
+    {
+        printf("\nNo se pudo abrir el archivo\n");
+    }
+
+
+
+
 
 
 
@@ -1334,13 +2334,13 @@ void altaAstronautaMisionViaje(int astronautaID, int destino)
 
 /// BAJA DE ASTONAUTA POR MISION FALLIDA
 
-void bajaDeAstronautaPorMuerte(int astronautaID[])
+void bajaDeAstronautaPorMuerte(int astronautaID)
 {
 
 
     FILE* archivo;
 
-    int validacion = 0;
+
 
     archivo = fopen("listaAstronauta.bin","r+b");
 
@@ -1353,17 +2353,18 @@ void bajaDeAstronautaPorMuerte(int astronautaID[])
 
 
 
-        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0 && validacion == 0)
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0 )
         {
 
             if(astronauta.ID == astronautaID)
             {
 
-                astronauta.ID = 4;
-                validacion =1;
+                astronauta.estado = 4;
+
 
                 fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
                 fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
+                fclose(archivo);
 
 
             }
@@ -1396,50 +2397,26 @@ void bajaDeAstronautaPorMuerte(int astronautaID[])
 
 int detectarModeloDeNave(int idNave)
 {
-
     FILE* archivo;
-
-    archivo = fopen("listaNave.bin","rb");
-
+    archivo = fopen("listaNave.bin", "rb");
     stNave nave;
-
     int salida = 0;
-
-    if(archivo != NULL)
+    if (archivo != NULL)
     {
-
-        while(fread(&nave, sizeof(stNave), 1, archivo)>0)
+        while (fread(&nave, sizeof(stNave), 1, archivo) > 0 && idNave != nave.ID)
         {
-
-            if(idNave == nave.ID)
-            {
-
-                salida = nave.tipoDeNave;
-
-            }
-
-
         }
-
-
+        if (idNave == nave.ID)
+        {
+            salida = nave.tipoDeNave;
+        }
         fclose(archivo);
-
-
     }
     else
     {
-
         printf("\nNo se pudo ejecutar el archivo\n");
-
     }
-
-
-
-
     return salida;
-
-
-
 }
 
 
@@ -1497,50 +2474,33 @@ int verificacionDeEstadoDeAstronauta(int idCargaAstronauta)
 
 int verificacionDeMisionEntrada(int idMisionVerificacion)
 {
-
-    int salida = 0;
+    int salida = -1;
 
     FILE* archivo;
-
     stMision misiones;
 
-    archivo = fopen("listaMision.bin","rb");
+    archivo = fopen("ListaMisiones.bin", "rb");
 
-    if(archivo !=NULL)
+    if (archivo != NULL)
     {
-
-        while(fread(&misiones, sizeof(stMision), 1, archivo)>0)
+        while (fread(&misiones, sizeof(stMision), 1, archivo) > 0)
         {
-
-
-            if(idMisionVerificacion == misiones.ID)
+            if (idMisionVerificacion == misiones.ID)
             {
-
-
                 salida = misiones.estado;
-
+                break;
             }
-
-
         }
 
-
         fclose(archivo);
-
-
-
     }
     else
     {
-
         printf("\nNo se pudo abrir el archivo\n");
-
     }
-    return salida;  /// retorna el estado de la mision
 
-
+    return salida;  // Retorna el estado de la misi√≥n (o -1 si no se encontr√≥)
 }
-
 /// verificacion ESTADO NAVA
 
 int verificacionDeEstadoDeLaNave(int verificado)
@@ -1551,7 +2511,7 @@ int verificacionDeEstadoDeLaNave(int verificado)
 
     stNave nave;
 
-    int salida = 0;
+    int salida = -1;
 
     archivo = fopen("listaNave.bin","rb");
 
@@ -1565,12 +2525,12 @@ int verificacionDeEstadoDeLaNave(int verificado)
             if(nave.ID == verificado)
             {
 
-                if(nave.estado == 1)
-                {
 
-                    salida = 1;
 
-                }
+
+                salida = nave.estado;
+                fclose(archivo);
+
 
             }
 
@@ -1587,6 +2547,5 @@ int verificacionDeEstadoDeLaNave(int verificado)
 
     }
 
-    return salida; /// si retorna 0 no se puede usar. si retorna 1 se puede usar
-
+    return salida;
 }

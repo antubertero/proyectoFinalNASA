@@ -21,7 +21,7 @@ void altaAstronauta()
 
     system("cls"); /// limpia la pantalla
 
-    printf("\nAstronauta Alta:\n\n");
+    printf("\n----------------\nASTRONAUTA ALTA:\n----------------\n\n");
 
     FILE *archivo;
     stAstronauta astronauta;
@@ -40,19 +40,22 @@ void altaAstronauta()
         scanf("%i", &astronautaIDverficacion);
         resultadoVerificado = verificacionDeIdAstronauta(astronautaIDverficacion);
 
-        if(resultadoVerificado == 0){
+        if(resultadoVerificado == 0)
+        {
 
 
-           astronauta.ID = astronautaIDverficacion;
+            astronauta.ID = astronautaIDverficacion;
 
 
-        }else{
-        system("cls"); /// limpia la pantalla
-        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-        printf("\nLa id YA EXISTE\n");
-        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-        fclose(archivo);
-        altaAstronauta();
+        }
+        else
+        {
+            system("cls"); /// limpia la pantalla
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+            printf("\nLa id YA EXISTE\n");
+            Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+            fclose(archivo);
+            altaAstronauta();
 
         }
 
@@ -63,9 +66,33 @@ void altaAstronauta()
         scanf("%s", &astronauta.apellido);
         printf("\nIngresar el apodo de %s %s : ", astronauta.apellido, astronauta.nombre);
         scanf("%s", &astronauta.apodo);
-        printf("\nIngresar la edad de %s:  ", astronauta.apodo);
+
         fflush(stdin);
-        scanf("%i", &astronauta.edad);
+        int confirmacionEdad = 0;
+        int edadVerificacion;
+        while(confirmacionEdad == 0)
+        {
+
+            printf("\nIngresar la edad: ");
+            scanf("%i", &edadVerificacion);
+
+            if(edadVerificacion > 17 && edadVerificacion<61)
+            {
+
+                astronauta.edad = edadVerificacion;
+                confirmacionEdad = 1;
+
+            }
+            else
+            {
+
+                printf("\nLa edad NO cumple con los requisitos tiene que ser mayor o igual a 18 y menor o igual a 60\n\nIngresar nuevamente la edad: \n");
+
+            }
+
+
+        }
+
         fflush(stdin);
         printf("\nIngresar la nacionalidad  : ");
         scanf("%s", &astronauta.nacionalidad);
@@ -92,6 +119,7 @@ void altaAstronauta()
         fclose(archivo);
 
         imprimirPuntosSuspensivosCarga();
+        system("cls"); /// limpia la pantalla
         printf("\n\nLOS DATOS SE CARGARON CON EXITO \n\n %s  FORMA PARTE DEL EQUIPO SPACEX\n\n", astronauta.apodo);
         Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 
@@ -117,64 +145,88 @@ void darDeBajaAstronauta()
 
     system("cls"); /// limpia la pantalla
 
-    printf("\nAstronauta BAJA:\n\nIngresar un CERO para volver al menu\n");
+    printf("\n----------------\nBAJA ASTRONAUTA:\n----------------\n\nIngresar un CERO para volver al menu\n");
     printf("\nIngresar el ID: ");
     scanf("%i", &IDBuscado);
     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 
     if(IDBuscado == 0)
     {
+
         MenuPrincipal();
+
     }
 
-    FILE* archivo;
-    int validacion;
+    int entrada = estadoDeAstronauta(IDBuscado);
 
-    archivo = fopen("listaAstronauta.bin", "r+b");
-
-    if(archivo != NULL)
+    if(entrada == 1)
     {
-        while(fread(&astronauta, sizeof(astronauta), 1, archivo) != NULL && salida == 0)
+
+
+
+        FILE* archivo;
+        int validacion;
+
+        archivo = fopen("listaAstronauta.bin", "r+b");
+
+        if(archivo != NULL)
         {
-            if(astronauta.ID == IDBuscado)
+            while(fread(&astronauta, sizeof(astronauta), 1, archivo) >0 && salida == 0)
             {
-                printf("\nAstronauta encontrado\n");
-                printf("\n\nATENCION !! SE DARA DE BAJA AL ASTRONAUTA %s\n\nIngresar un cero para confirmar, ingresar cualquier otro valor para cancelar la baja\n", astronauta.apodo);
-                scanf("%i", &validacion);
-                Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-
-                if(validacion == 0)
+                if(astronauta.ID == IDBuscado)
                 {
-
-                    astronauta.estado = 2; /// 2 dado de baja
-                    printf("El astronauta con el ID %i fue dado de baja\n", IDBuscado);
+                    system("cls"); /// limpia la pantalla
+                    printf("\nID DE ASTRONAUTA ENCONTRADA\n");
+                    printf("\n\nATENCION !! SE DARA DE BAJA AL ASTRONAUTA %s\n\nIngresar un UNO para confirmar, ingresar cualquier otro valor para cancelar la baja\n", astronauta.apodo);
+                    scanf("%i", &validacion);
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
-                    fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
-                    salida = 1;
-                }
-                else
-                {
 
-                    printf("\nLa baja se cancelo\n");
-                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    MenuPrincipal();
-                }
-            }
-            else
-            {
+                    if(validacion == 1)
+                    {
 
-                printf("El ID ingresado no se encontr� en el archivo\n");
-                Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                darDeBajaAstronauta();
+                        astronauta.estado = 2; /// 2 dado de baja
+                        system("cls"); /// limpia la pantalla
+                        printf("El astronauta con el ID %i fue dado de baja\n", IDBuscado);
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
+                        fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
+                        salida = 1;
+                    }
+                    else
+                    {
+
+                        printf("\nLA BAJA SE CANCELO\n");
+                        fclose(archivo);
+                        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                        MenuPrincipal();
+                    }
+                }
+
             }
+
+            fclose(archivo);
+        }
+        else
+        {
+            printf("\nNo se pudo abrir el archivo\n");
         }
 
-        fclose(archivo);
+        MenuPrincipal();
+
     }
-    else
+    else if(entrada == 2 || entrada == 3 || entrada == 4 || entrada == 5)
     {
-        printf("\nNo se pudo abrir el archivo\n");
+        system("cls"); /// limpia la pantalla
+        printf("\nEL astronauta no esta en condicines de dar de baja");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+    }
+    else if(entrada == -1)
+    {
+        system("cls"); /// limpia la pantalla
+        printf("\nLa id ingresada no existe");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
     }
 
     MenuPrincipal();
@@ -188,10 +240,11 @@ void modificacionAstronauta()
     int datoModificado;
     int contador = 0;
     int verificador = 0;
+    int entrada;
 
     system("cls"); /// limpia la pantalla
 
-    printf("\nModificaci�n de Astronauta:\n\n");
+    printf("\n----------------\MODIFICACION DE ASTRONAUTA:\n----------------\n\n\n\n ");
 
     FILE* archivo;
 
@@ -213,61 +266,117 @@ void modificacionAstronauta()
         printf("\nNo se pudo abrir el archivo\n");
     }
 
-    printf("\nIngresar el ID que deseas modificar: ");
+    printf("\n\nIngresar el ID que deseas modificar: ");
     scanf("%i", &datoModificado);
 
-    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+    int validacion = estadoDeAstronauta(datoModificado);
 
-    archivo = fopen("listaAstronauta.bin", "rb+");
-
-    if (archivo != NULL)
+    if(validacion == 1 )
     {
-        while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) == 1)
-        {
-            if (datoModificado == astronauta.ID)
-            {
-                printf("\nAstronauta encontrado, se puede modificar");
-
-                printf("\nIngresar el nombre: ");
-                scanf("%s", astronauta.nombre);
-                printf("Ingresar el apellido: ");
-                scanf("%s", astronauta.apellido);
-                printf("Ingresar el apodo: ");
-                scanf("%s", astronauta.apodo);
-                printf("Ingresar la edad: ");
-                scanf("%i", &astronauta.edad);
-                printf("Ingresar la nacionalidad: ");
-                scanf("%s", astronauta.nacionalidad);
-                printf("Ingresar la especialidad: ");
-                scanf("%s", astronauta.especialidad);
-
-                fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
-                fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
-
-                printf("\n\nDATOS MODIFICADOS CON EXITO\n\n");
-                Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                fclose(archivo);
-                verificador = 1;
-
-            }
-        }
-
-        if(verificador == 0){
-
-            printf("\nNo se encontr� el ID\n");
-
-        }
 
         Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-        fclose(archivo);
-        fflush(stdin);
+
+        archivo = fopen("listaAstronauta.bin", "r+b");
+
+        if (archivo != NULL)
+        {
+            while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) == 1)
+            {
+                if (datoModificado == astronauta.ID)
+                {
+                    printf("\nAstronauta ECONTRADO, se puede modificar");
+
+                    printf("\nIngresar el nombre: ");
+                    scanf("%s", astronauta.nombre);
+                    printf("Ingresar el apellido: ");
+                    scanf("%s", astronauta.apellido);
+                    printf("Ingresar el apodo: ");
+                    scanf("%s", astronauta.apodo);
+                    int confirmacionEdad = 0;
+                    int edadVerificacion;
+                    while(confirmacionEdad == 0)
+                    {
+
+                        printf("Ingresar la edad: ");
+                        scanf("%i", &edadVerificacion);
+
+                        if(edadVerificacion > 17 && edadVerificacion<61)
+                        {
+
+
+                            astronauta.edad = edadVerificacion;
+                            confirmacionEdad = 1;
+
+                        }
+                        else
+                        {
+
+                            printf("\nLa edad cumple NO cumple con los requisitos tiene que ser mayor i igual a 18 y menor o igual a 60\n\nIngresar nuevamente la edad: \n");
+
+                        }
+
+
+                    }
+
+                    printf("Ingresar la nacionalidad: ");
+                    scanf("%s", astronauta.nacionalidad);
+                    printf("Ingresar la especialidad: ");
+                    scanf("%s", astronauta.especialidad);
+
+                    fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
+                    fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
+
+                    system("cls"); /// limpia la pantalla
+                    printf("\n\nDATOS MODIFICADOS CON EXITO\n\n");
+                    Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+                    fclose(archivo);
+                    verificador = 1;
+
+                }
+            }
+
+            if(verificador == 0)
+            {
+                system("cls"); /// limpia la pantalla
+                printf("\nNo se encontro el ID\n");
+                Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+            }
+
+
+            fclose(archivo);
+            fflush(stdin);
+            MenuPrincipal();
+
+        }
+        else
+        {
+            printf("\nNo se pudo abrir el archivo\n");
+        }
         MenuPrincipal();
+
     }
-    else
+    else if(entrada == 2 || entrada == 3 || entrada == 4 || entrada == 5)
     {
-        printf("\nNo se pudo abrir el archivo\n");
+
+        system("cls"); /// limpia la pantalla
+        printf("\nEL astronauta no esta en condicines de dar de baja\n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
     }
+    else if(entrada == -1)
+    {
+        system("cls"); /// limpia la pantalla
+        printf("\nLa id ingresada no existe\n");
+        Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
+
+    }
+
     MenuPrincipal();
+
+
+
+
 
 }
 
@@ -278,7 +387,7 @@ void mostrarListado()
 
     system("cls"); /// limpia la pantalla
 
-    printf("\nListado de astronautas\n");
+    printf("\n----------------\nLISTADO DE ASTRONAUTAS:\n----------------\n\n");
 
     FILE* archivo;
     stAstronauta astronauta;
@@ -289,20 +398,38 @@ void mostrarListado()
 
     if (archivo != NULL)
     {
+        printf("\n\nLISTADO:\n\n");
         while (fread(&astronauta, sizeof(stAstronauta), 1, archivo) > 0) /// el ultimo de la lista lo muestra dos veces
         {
 
 
-            printf("\n\nLISTADO:\n\n");
-            printf("%i - %i %s %s\n", contador + 1, astronauta.ID, astronauta.apellido, astronauta.nombre);
+            printf("\n----------\n");
+            printf("\n%i - \n=> ID : %i \n=> APELLIDO : %s\n=> NOMBRE=> %s\n", contador + 1, astronauta.ID, astronauta.apellido, astronauta.nombre); ///(1- Activo 2- Retirado  3 - En viaje 4 - Baja en mision)
 
-            printf("   ESTADO: ");
-            if(astronauta.estado==1){
-                printf("ACTIVO");
+            printf("\n=>ESTADO: ");
+            switch(astronauta.estado)
+            {
 
-            }else if(astronauta.estado == 2){
+            case 1 :
+                printf("Listo");
+                break;
 
-            printf("RETIRADO");
+            case 2 :
+                printf("Retirado");
+                break;
+
+            case 3 :
+                printf("En viaje");
+                break;
+
+            case 4 :
+                printf("Baja en mision");
+                break;
+
+            case 5:
+                printf("Mision asignada");
+                break;
+
 
             }
 
@@ -345,7 +472,9 @@ void mostrarListado()
 void consultaPorID()
 {
 
+    system("cls"); /// limpia la pantalla
 
+    printf("\n----------------\nCONSULTA POR ID:\n----------------\n\n");
 
     FILE* archivo;
 
@@ -353,7 +482,6 @@ void consultaPorID()
 
     stAstronauta astronauta;
 
-    system("cls"); /// limpia la pantalla
 
     int verificador = 0;
 
@@ -370,11 +498,38 @@ void consultaPorID()
 
             if(busquedaConsultar == astronauta.ID)
             {
+                system("cls"); /// limpia la pantalla
+                printf("\n\nSE ENCONTRO LA ID\n");
 
-                printf("\n\nSe encontro la ID\n");
+                printf("=> ID : %i \n=> APELLIDO: %s\n=> NOMBRE: %s\n", astronauta.ID, astronauta.apellido, astronauta.nombre);
+                printf("\n=> APODO: %s\n=> EDAD: %i\n=> NACIONALIDAD: %s\n=> ESPECIALIDAD: %s", astronauta.apodo, astronauta.edad, astronauta.nacionalidad, astronauta.especialidad);
+                printf("\n=> HORAS DE VUELO ACUMULADAS: %f\n=> HORAS DE VUELO ACUMULADAS EN EL ESPACIO INTERNACIONAL: %f\n=> MISIONES TOTALES: %i\n=> ESTADO: ", astronauta.horasDeVueloAcumuladas, astronauta.horasAcumuladasEnElEspacioInternacioal, astronauta.misionesEspecialesRealizadas);
 
-                printf(" %i %s %s\n", astronauta.ID, astronauta.apellido, astronauta.nombre);
-                printf("\nApodo: %s \nEdad: %i\nNacionalidad: %s\nEspecialidad: %s\nHoras de vuelo acumuladas: %i\nCantidad de misiones especiales: %i\nHoras Acumuladas en el espacio: %f\nEstado: %i", astronauta.apodo, astronauta.edad, astronauta.nacionalidad, astronauta.especialidad, astronauta.horasDeVueloAcumuladas, astronauta.misionesEspecialesRealizadas, astronauta.horasAcumuladasEnElEspacioInternacioal, astronauta.estado);
+                switch(astronauta.estado)
+                {
+
+                case 1 :
+                    printf("Listo");
+                    break;
+
+                case 2 :
+                    printf("Retirado");
+                    break;
+
+                case 3 :
+                    printf("En viaje");
+                    break;
+
+                case 4 :
+                    printf("Baja en mision");
+                    break;
+                case 5:
+                    printf("Mision asignada");
+                    break;
+
+
+                }
+
                 verificador = 1;
 
 
@@ -384,9 +539,11 @@ void consultaPorID()
 
         }
 
-        if(verificador == 0){
+        if(verificador == 0)
+        {
 
-            printf("\nNo se encontro la ID\n");
+            system("cls"); /// limpia la pantalla
+            printf("\n\nNO SE ENCONTRO LA ID\n");
 
         }
 
@@ -421,6 +578,7 @@ void consultaPorID()
         printf("\nEl archivo no se pudo ejecutar");
 
     }
+    MenuPrincipal();
 
 }
 
@@ -429,38 +587,84 @@ void consultaPorID()
 
 /// funciones adicionales
 
+int estadoDeAstronauta(int IDBuscado)
+{
 
-int verificacionDeIdAstronauta(int astronautaIDverficacion){
+    stAstronauta astronauta;
+    int salida = -1;
 
-FILE* archivo;
+    FILE* archivo;
+    archivo = fopen("listaAstronauta.bin","rb");
 
-stAstronauta astronauta;
+    if(archivo != NULL)
+    {
 
-int salida = 0;
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0)
+        {
 
-archivo = fopen("listaAstronauta.bin", "rb");
+            if(IDBuscado == astronauta.ID)
+            {
 
-if(archivo != NULL){
+                salida = astronauta.estado;
+                fclose(archivo);
 
-    while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0){
-
-        if(astronautaIDverficacion == astronauta.ID){
-
-            salida = 1;
+            }
 
         }
+        fclose(archivo);
 
 
     }
+    else
+    {
 
-    fclose(archivo);
+        printf("\nNo se pudo abrir el archivo\n");
 
-}else{
+    }
 
-printf("\nNo se pudo ejecutar el archivo\n");
+
+    return salida;
 
 }
 
-return salida;
+
+int verificacionDeIdAstronauta(int astronautaIDverficacion)
+{
+
+    FILE* archivo;
+
+    stAstronauta astronauta;
+
+    int salida = 0;
+
+    archivo = fopen("listaAstronauta.bin", "rb");
+
+    if(archivo != NULL)
+    {
+
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0)
+        {
+
+            if(astronautaIDverficacion == astronauta.ID)
+            {
+
+                salida = 1;
+
+            }
+
+
+        }
+
+        fclose(archivo);
+
+    }
+    else
+    {
+
+        printf("\nNo se pudo ejecutar el archivo\n");
+
+    }
+
+    return salida;
 
 }
