@@ -12,6 +12,12 @@
 
 void altaMision()
 {
+
+    int cantidadDeAstronautasSuficientes  = contadorDeAstronautasEnEstadoListo();
+
+
+    if(cantidadDeAstronautasSuficientes > 2){
+
     system("cls"); /// limpia la pantalla
     printf("\n----------------\nINICIO DE MISION:\n----------------\n\n");
 
@@ -475,6 +481,14 @@ void altaMision()
 
     }
 
+    }else{
+
+    system("cls"); /// limpia la pantalla
+    printf("\n\nLa cantidad minima para iniciar una mision es de 3 astronautas,\n\n cargar mas astronautas para poder iniciar una mision\n");
+    Sleep(6000); /// proceso espere durante aproximadamente 3 segundos
+    MenuPrincipal();
+
+    }
 
 
 }
@@ -958,20 +972,20 @@ void despegueDeMision()
                 system("cls"); /// limpia la pantalla
 
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip ACOPLADO");
+                printf("\nStarship ACOPLADO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 imprimirStarshipAcoplado();
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip DESACOPLADO");
+                printf("\nStarship DESACOPLADO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 imprimirStarshipDesacomplado();
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip DESPEGANDO");
+                printf("\nStarship DESPEGANDO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
@@ -1006,7 +1020,7 @@ void despegueDeMision()
 
                     system("cls"); /// limpia la pantall
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    printf("\nEL DESPEGUE FUE EXITOSO\n\n SE COMLETARA DE FORMA EXITOSA LA MISION");
+                    printf("\nEL DESPEGUE FUE EXITOSO\n\n SE COMPLETO DE FORMA EXITOSA LA MISION");
                     altaAstronautaMisionViaje(piloto1ID, destino);
                     altaAstronautaMisionViaje(piloto2ID, destino);
                     altaAstronautaMisionViaje(piloto3ID, destino);
@@ -1024,13 +1038,13 @@ void despegueDeMision()
 
                 system("cls"); /// limpia la pantalla
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip ACOPLADO");
+                printf("\nFalcon 9 ACOPLADO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 imprimirFalcon9Acoplado();
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip DESACOPLADO");
+                printf("\nFalcon 9 DESACOPLADO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
@@ -1038,7 +1052,7 @@ void despegueDeMision()
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip DESPEGANDO");
+                printf("\nFalcon 9 DESPEGANDO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
@@ -1070,7 +1084,7 @@ void despegueDeMision()
 
                     system("cls"); /// limpia la pantall
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    printf("\nEL DESPEGUE FUE EXITOSO\n\n SE COMLETARA DE FORMA EXITOSA LA MISION");
+                    printf("\nEL DESPEGUE FUE EXITOSO\n\n SE COMPLETO DE FORMA EXITOSA LA MISION");
                     altaAstronautaMisionViaje(piloto1ID, destino);
                     altaAstronautaMisionViaje(piloto2ID, destino);
                     altaAstronautaMisionViaje(piloto3ID, destino);
@@ -1083,6 +1097,7 @@ void despegueDeMision()
 
 
 
+
             }
             else if(tipoDeNaveDespegue == 3)   /// imprimirFalconHeavy misiones
             {
@@ -1091,12 +1106,12 @@ void despegueDeMision()
                 system("cls"); /// limpia la pantalla
 
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip ACOPLADO");
+                printf("\nFalconHeavy ACOPLADO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 imprimirFalconHeavyAclopado();
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
-                printf("\nStarsip DESACOPLADO");
+                printf("\nFalconHeavy DESACOPLADO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
@@ -1104,7 +1119,7 @@ void despegueDeMision()
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                printf("\nStarsip DESPEGANDO");
+                printf("\nFalconHeavy DESPEGANDO");
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 system("cls"); /// limpia la pantall
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
@@ -1137,7 +1152,7 @@ void despegueDeMision()
 
                     system("cls"); /// limpia la pantall
                     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                    printf("\nEL DESPEGUE FUE EXITOSO\n\n SE COMLETARA DE FORMA EXITOSA LA MISION");
+                    printf("\nEL DESPEGUE FUE EXITOSO\n\n SE COMPLETO DE FORMA EXITOSA LA MISION");
                     altaAstronautaMisionViaje(piloto1ID, destino);
                     altaAstronautaMisionViaje(piloto2ID, destino);
                     altaAstronautaMisionViaje(piloto3ID, destino);
@@ -1384,7 +1399,7 @@ void sacarDeMantenimiento()
     int valorID, confirmarSalidaDeMantenimiento;
     system("cls"); /// limpia la pantalla
     printf("\n----------------\nTALLER SPACEX:\n----------------\n\n\n");
-    printf("\n\nIngresar la id de la nave que quieras poner en servivio\n\n INGRESAR VALOR:  ");
+    printf("\n\nIngresar la id de la nave que quieras poner en servicio\n\n INGRESAR VALOR:  ");
     scanf("%i", &valorID);
 
     int estadoNave = verificacionDeEstadoDeLaNave(valorID);
@@ -1484,6 +1499,39 @@ void sacarDeMantenimiento()
 
 
 ///---------------------
+
+int contadorDeAstronautasEnEstadoListo(){
+
+int salida = 0, contador = 0;
+
+stAstronauta astronauta;
+FILE* archivo;
+archivo = fopen("listaAstronauta.bin","rb");
+
+if(archivo != NULL){
+
+        while(fread(&astronauta, sizeof(stAstronauta), 1, archivo)>0){
+
+            if(astronauta.estado == 1){
+
+                contador = contador +1;
+
+            }
+
+        }
+        fclose(archivo);
+
+
+}else{
+
+printf("\nEl archivo no se pudo abrir\n");
+
+}
+salida = contador;
+
+return salida;
+
+}
 
 int estadoDeLaMision(int ID)
 {

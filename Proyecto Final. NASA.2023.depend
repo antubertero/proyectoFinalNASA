@@ -94,7 +94,7 @@
 
 1687963560 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.h
 
-1687968336 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
+1687983757 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\main.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -103,7 +103,7 @@
 	"naves.h"
 	"astronautas.h"
 
-1687968169 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
+1687971365 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\naves.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
@@ -113,7 +113,7 @@
 	"misiones.h"
 	<windows.h>
 
-1687968336 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.c
+1687973372 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\proyecto final nasa mejorado\misiones.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -122,4 +122,49 @@
 	"astronautas.h"
 	"naves.h"
 	"misiones.h"
+
+1687994682 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\astronautas.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"astronautas.h"
+	"naves.h"
+	"misiones.h"
+
+1687957376 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\astronautas.h
+
+1687958681 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\naves.h
+
+1687998543 e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\misiones.h
+
+1687998389 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"naves.h"
+	"astronautas.h"
+
+1687999158 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\misiones.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<unistd.h>
+	<time.h>
+	"astronautas.h"
+	"naves.h"
+	"misiones.h"
+
+1687999719 source:e:\programacion\utn\1 a—o\programacion y laboratorio 1\c\tp final\tp final - spacex - bertero - loureiro\proyecto final spacex\naves.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"naves.h"
+	<time.h>
+	"astronautas.h"
+	"misiones.h"
+	<windows.h>
 

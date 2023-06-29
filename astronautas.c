@@ -191,6 +191,7 @@ void darDeBajaAstronauta()
                         fseek(archivo, -sizeof(stAstronauta), SEEK_CUR);
                         fwrite(&astronauta, sizeof(stAstronauta), 1, archivo);
                         salida = 1;
+                        fclose(archivo);
                     }
                     else
                     {
@@ -404,7 +405,7 @@ void mostrarListado()
 
 
             printf("\n----------\n");
-            printf("\n%i - \n=> ID : %i \n=> APELLIDO : %s\n=> NOMBRE=> %s\n", contador + 1, astronauta.ID, astronauta.apellido, astronauta.nombre); ///(1- Activo 2- Retirado  3 - En viaje 4 - Baja en mision)
+            printf("\n%i - \n=> ID : %i \n=> APELLIDO : %s\n=> NOMBRE : %s\n", contador + 1, astronauta.ID, astronauta.apellido, astronauta.nombre); ///(1- Activo 2- Retirado  3 - En viaje 4 - Baja en mision)
 
             printf("\n=>ESTADO: ");
             switch(astronauta.estado)

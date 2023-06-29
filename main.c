@@ -44,9 +44,8 @@ void MenuPrincipal()
 
     system("cls"); /// limpia la pantalla
 
-    printf("BIENVENIDO A LA NASA \n");
-    do
-    {
+    printf("BIENVENIDO A spacex \n");
+
         printf("Menu Principal : \n");
         printf("1-Astronautas \n");
         printf("2-Naves\n");
@@ -56,6 +55,8 @@ void MenuPrincipal()
         printf("  \n Ingresar opcion: ");
         scanf("%i",&opcion);
 
+    while(opcion != 4)
+    {
         switch(opcion) //// ANIDAMOS SWITCH DENTRO DE SWITCH PARA GENERAR UN MENU DE OPCIONES ORIENTATIVO.
         {
         case 1:
@@ -101,6 +102,11 @@ void MenuPrincipal()
 
             case 0:
                 MenuPrincipal(); ///LLAMAMOS FUNCION MENU PRINCIPAL PARA VOLVER AL PRIMER MENU ESTABLECIDO
+                break;
+
+            default:
+
+                MenuPrincipal();
                 break;
             }
         }
@@ -149,6 +155,9 @@ void MenuPrincipal()
             case 0:
                 MenuPrincipal(); ///LLAMAMOS FUNCION MENU PRINCIPAL PARA VOLVER AL PRIMER MENU ESTABLECIDO
                 break;
+
+            default:
+                MenuPrincipal();
             }
         }
         break;
@@ -165,7 +174,7 @@ void MenuPrincipal()
             {
 
             case 1:
-                printf("Alta de mision \n");
+
                 altaMision(); /// VALIDAR SI LA NAVE ESTA LISTA PARA DESPEGAR
                 break;
 
@@ -179,7 +188,7 @@ void MenuPrincipal()
                 system("cls"); /// limpia la pantalla
                 printf("Modidicacion de ESTADO de mision \n");
 
-                printf("\n1)Despegue\n2)retorno\n3)Taller de naves\nIngresar opcion:  ");
+                printf("\n1)Despegue\n2)retorno\n3)Taller de naves\n4) volver al menu\n\nIngresar opcion:  ");
                 scanf("%i", &opcion3);
 
                 switch(opcion3)
@@ -200,11 +209,23 @@ void MenuPrincipal()
                     sacarDeMantenimiento();
                     break;
 
+                case 4 :
+
+                    MenuPrincipal();
+                    break;
+
+                default:
+
+                    MenuPrincipal();
+
+
+
                 }
                 break;
+                MenuPrincipal();
 
             case 4:
-                printf("Ingrese un ID de mision para consultar \n");
+
                 contasultaIDmision();
                 ///FUNCION MOSTRAR UNA MISION DETERMINADA
                 break;
@@ -218,14 +239,26 @@ void MenuPrincipal()
             case 0:
                 MenuPrincipal(); ///LLAMAMOS FUNCION MENU PRINCIPAL PARA VOLVER AL PRIMER MENU ESTABLECIDO
                 break;
+            default:
+
+                MenuPrincipal();
+
+                break;
             }
         }
         break;
+
+            default:
+
+                MenuPrincipal();
+
+
+
         }/// FIN SWITCH PRINCIPAL
     }
-    while(!opcion == 4);
 
     system("cls"); /// limpia la pantalla
+
     printf("\n\n\n\n         GRACIAS POR CONFIAR EN NOSOTROS \n\n\n\n");
     Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
 

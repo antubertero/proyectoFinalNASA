@@ -123,7 +123,7 @@ void bajaNave()
 
     stNave nave;
     int IDbuscado;
-    printf("\n----------------\BAJA DE NAVE:\n----------------\n\nIngresar la ID de la nave\n\nIngresar opcion:  ");
+    printf("\n----------------\nBAJA DE NAVE:\n----------------\n\nIngresar la ID de la nave\n\nIngresar opcion:  ");
     scanf("%i", &IDbuscado);
 
     int validacion = estadoDeNave(IDbuscado);
@@ -142,7 +142,7 @@ void bajaNave()
         {
 
 
-            while(fread(&nave, sizeof(stNave), 1, archivo) > 0)
+            while(fread(&nave, sizeof(stNave), 1, archivo) > 0 && valido == 0)
             {
 
 
@@ -155,10 +155,11 @@ void bajaNave()
                     if(opcionConf == 1)
                     {
                         Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
-                        fseek(archivo, -sizeof(stNave), SEEK_SET);
+
                         /// hacer funcion que devuelva el lugar donde se encontro.
 
                         nave.estado = 3; /// baja
+                        fseek(archivo, -sizeof(stNave), SEEK_CUR);
                         fwrite(&nave, sizeof(stNave), 1, archivo);
 
                         system("cls"); /// limpia la pantalla
@@ -167,7 +168,7 @@ void bajaNave()
                         valido = 1;
                         fclose(archivo);
 
-                        MenuPrincipal();
+
 
                     }
                     else
@@ -183,7 +184,15 @@ void bajaNave()
 
                 }
 
+
+
             }
+            fclose(archivo);
+
+
+
+            }
+
 
             if(valido == 0)  /// no se encontro la nave
             {
@@ -193,21 +202,12 @@ void bajaNave()
                 Sleep(3000); /// proceso espere durante aproximadamente 3 segundos
                 fclose(archivo);
                 MenuPrincipal();
-
             }
-        }
-        else
-        {
-
-            printf("\nNo se pudo ejecutar el archivo\n");
-
-            MenuPrincipal();
 
 
-        }
-    }
-    else if(validacion == -1)
-    {
+
+
+        }else if(validacion == -1){
         system("cls"); /// limpia la pantalla
 
         printf("\nLa ID de la nave NO existe\n ");
@@ -408,11 +408,14 @@ void consultPorIDNAVE()
                 }
                 else if (nave.estado == 2)
                 {
-                    printf("Actualmente en misi�n\n");
+                    printf("Actualmente en mision\n");
                 }
                 else if (nave.estado == 3)
                 {
-                    printf("De baja\n");
+                    printf("De baja mision fallida\n");
+                }else if(nave.estado == 4){
+                    printf("En mantenimiento\n");
+
                 }
 
                 printf("\n\n");
@@ -478,7 +481,7 @@ void modificacionDeNave()
 
     FILE* archivo;
 
-    int modificarID, valido = 0;
+    int modificarID, valido = 0, IDnueva;
 
     stNave nave;
 
@@ -510,10 +513,13 @@ void modificacionDeNave()
 
 
                     printf("Ingresar NUEVA ID: ");
-                    scanf("%i", &nave.ID);
+                    scanf("%i", &IDnueva);
+
+                    nave.ID = IDnueva;
 
                     fseek(archivo, -sizeof(stNave), SEEK_CUR); /// no lo puedo hacer funcionar
-                    fread(&nave, sizeof(stNave), 1, archivo);
+                    fwrite(&nave, sizeof(stNave), 1, archivo);
+                    fclose(archivo);
 
                     system("cls"); /// limpia la pantalla
                     printf("\nSE PUDO MODIFICAR CORRECTAMENTE LA NAVE");

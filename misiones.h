@@ -51,6 +51,7 @@ void cambiarEstadoDeLaNaveAMisionAsignada(int ID);
 void modificacionDeAstronautaMisionCancelada(int ID);
 void modificarEstadoDeLaNavePorMisionCancelada(int ID);
 int estadoDeLaMision(int ID);
+int contadorDeAstronautasEnEstadoListo();
 
 
 
